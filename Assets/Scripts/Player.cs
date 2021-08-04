@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const float speed = 8;
+    private const float runAcceleration = 20;
+    private const float maxRunSpeed = 9;
     private const float jumpForce = 10;
     private const float doubleJumpForce = 10;
     private const float gravityForce = 20;
-    private const float slamForce = 40;
+    private const float maxFallSpeed = 30;
+    private const float slamSpeed = 35;
     private const float minBounceForce = 5;
 
     private Rigidbody2D rb;
     private EdgeCollider2D ec;
+
     private bool triggerWasHeld = false;
     private bool jumpQueued = false;
     private bool slamQueued = false;
     private bool canDoubleJump = true;
     private bool isSlamming = false;
     private float xForce = 0;
+
+    private bool canJump = false;
+    private bool wasOnGround = false;
+    private Coroutine crtCancelQueuedJump;
+    private const float jumpBufferTime = 0.1f; //time before hitting ground a jump will still be queued
+    private const float jumpGraceTime = 0.1f; //time after leaving ground player can still jump (coyote time)
 
     private SpriteRenderer sr;
 
@@ -33,7 +42,9 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
+            TryStopCoroutine(crtCancelQueuedJump);
             jumpQueued = true;
+            crtCancelQueuedJump = StartCoroutine(CancelQueuedJump());
         }
 
         bool triggerHeld = Input.GetAxis("LTrigger") > 0 || Input.GetAxis("RTrigger") > 0;
@@ -56,7 +67,19 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         float xInput = Input.GetAxis("Horizontal");
-        float xVel = xInput * speed;
+        float prevXVel = rb.velocity.x;
+        float xVel;
+        float dx = runAcceleration * Time.fixedDeltaTime * xInput;
+        if (prevXVel != 0 && Mathf.Sign(xInput) != Mathf.Sign(prevXVel))
+		{
+            xVel = 0;
+		}
+        else
+		{
+            xVel = prevXVel + dx;
+            float speedCap = Mathf.Abs(xInput * maxRunSpeed);
+            xVel = Mathf.Clamp(xVel, -speedCap, speedCap);
+        }
 
         if (xForce != 0)
 		{
@@ -67,7 +90,7 @@ public class Player : MonoBehaviour
 			}
             else
 			{
-                if (Mathf.Sign(xVel) == Mathf.Sign(xForce)) {
+                if (Mathf.Sign(xInput) == Mathf.Sign(xForce)) {
                     //moving in same direction
                     if (Mathf.Abs(xVel) >= Mathf.Abs(xForce))
 					{
@@ -83,9 +106,9 @@ public class Player : MonoBehaviour
                 else
 				{
                     //moving in other direction
-                    //decrease xForce by xVel (stopping at 0)
+                    //decrease xForce by dx (stopping at 0)
                     float prevSign = Mathf.Sign(xForce);
-                    xForce += xVel / 4;
+                    xForce += dx;
                     if (Mathf.Sign(xForce) != prevSign)
 					{
                         xForce = 0;
@@ -106,6 +129,7 @@ public class Player : MonoBehaviour
             {
                 PlaySound(rechargeDoubleJumpSound);
             }*/
+            canJump = true;
             canDoubleJump = true;
 
             isSlamming = false;
@@ -119,8 +143,14 @@ public class Player : MonoBehaviour
         }
         else
 		{
-            yVel = rb.velocity.y - gravityForce * Time.fixedDeltaTime;
+            yVel = Mathf.Max(rb.velocity.y - gravityForce * Time.fixedDeltaTime, -maxFallSpeed);
+
+            if (wasOnGround)
+			{
+                StartCoroutine(LeaveGround());
+			}
         }
+        wasOnGround = onGround;
 
         if (onCeiling && yVel > 0)
         {
@@ -128,17 +158,24 @@ public class Player : MonoBehaviour
             //PlaySound(bonkSound);
         }
 
+        //if on ground or just left it: first jump
+        //if can double jump: second jump
+        //else: keep queued
         if (jumpQueued)
         {
-            jumpQueued = false;
-            if (onGround)
+            if (canJump)
             {
-                yVel = Mathf.Max(jumpForce, yVel + jumpForce);
+                StopCancelQueuedJump();
+                jumpQueued = false;
+                canJump = false;
+                yVel = jumpForce; //Mathf.Max(jumpForce, yVel + jumpForce);
                 //PlaySound(jumpSound);
             }
             else if (canDoubleJump)
-			{
-                yVel = Mathf.Max(doubleJumpForce, yVel + doubleJumpForce);
+            {
+                StopCancelQueuedJump();
+                jumpQueued = false;
+                yVel = doubleJumpForce; //Mathf.Max(doubleJumpForce, yVel + doubleJumpForce);
                 //PlaySound(doubleJumpSound);
                 canDoubleJump = false;
 			}
@@ -153,7 +190,7 @@ public class Player : MonoBehaviour
 
         if (isSlamming)
 		{
-            yVel = -slamForce;
+            yVel = -slamSpeed;
 		}
 
         Vector2 vel = new Vector2(xVel, yVel);
@@ -202,8 +239,6 @@ public class Player : MonoBehaviour
             //PlaySound(bounceSound);
             isSlamming = false;
             canDoubleJump = true;
-            //TODO add scaled bounce x force
-            //TODO clamp to min/max y for bouncing vertical? (terminal velocity)
             Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
             Vector2 bouncerPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
             Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;
@@ -220,8 +255,32 @@ public class Player : MonoBehaviour
             float bounceXVel = Mathf.Abs(rb.velocity.y) * bouncer.bounceForce * bouncerToPlayer.x;
             xForce = bounceXVel;
             print("bounce " + bounceXVel + ", " + bounceYVel);
-            //rb.velocity = new Vector2(rb.velocity.x, bounceYVel);
             rb.velocity = new Vector2(bounceXVel, bounceYVel);
         }
+    }
+
+	private void TryStopCoroutine(Coroutine crt)
+    {
+        if (crt != null)
+        {
+            StopCoroutine(crt);
+        }
+    }
+
+    private void StopCancelQueuedJump()
+    {
+        TryStopCoroutine(crtCancelQueuedJump);
+    }
+
+    private IEnumerator CancelQueuedJump()
+    {
+        yield return new WaitForSeconds(jumpBufferTime);
+        jumpQueued = false;
+    }
+
+    private IEnumerator LeaveGround()
+    {
+        yield return new WaitForSeconds(jumpGraceTime);
+        canJump = false;
     }
 }
