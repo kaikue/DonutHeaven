@@ -1463,46 +1463,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[0].x
-      value: -0.215
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[0].y
-      value: -0.905
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[1].x
-      value: -0.215
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[1].y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[2].x
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[2].y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[3].x
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[3].y
-      value: -0.905
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[4].x
-      value: -0.215
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645557275672026515, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
-      propertyPath: m_Points.Array.data[4].y
-      value: -0.905
-      objectReference: {fileID: 0}
     - target: {fileID: 1645557275672026516, guid: 1725e37f90cfc8c4fa5dcdeae53efde3, type: 3}
       propertyPath: m_Name
       value: player

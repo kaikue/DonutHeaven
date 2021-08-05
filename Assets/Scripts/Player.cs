@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private enum AnimState
+    {
+        STAND,
+        RUN,
+        JUMP,
+        FLAP,
+        FALL,
+        SLAM
+    }
+
     private const float runAcceleration = 20;
     private const float maxRunSpeed = 9;
     private const float jumpForce = 10;
@@ -29,13 +39,29 @@ public class Player : MonoBehaviour
     private const float jumpBufferTime = 0.1f; //time before hitting ground a jump will still be queued
     private const float jumpGraceTime = 0.1f; //time after leaving ground player can still jump (coyote time)
 
+    private const float runFrameTime = 0.1f;
     private SpriteRenderer sr;
+    private AnimState animState = AnimState.STAND;
+    private int animFrame = 0;
+    private float frameTime; //max time of frame
+    private float frameTimer; //goes from frameTime down to 0
+    private bool facingLeft = false; //for animation (images face right)
+    public Sprite standSprite;
+    public Sprite runSprite1;
+    public Sprite runSprite2;
+    public Sprite runSprite3;
+    public Sprite jumpSprite;
+    public Sprite flapSprite;
+    public Sprite fallSprite;
+    public Sprite slamSprite;
+    private Sprite[] runSprites;
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         ec = gameObject.GetComponent<EdgeCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
+        runSprites = new Sprite[] { runSprite1, runSprite2, runSprite3, runSprite2 };
     }
 
     private void Update()
@@ -54,6 +80,10 @@ public class Player : MonoBehaviour
             slamQueued = true;
         }
         triggerWasHeld = triggerHeld;
+
+        sr.flipX = facingLeft;
+        AdvanceAnim();
+        sr.sprite = GetAnimSprite();
     }
 
     private bool CheckSide(int point0, int point1, Vector2 direction)
@@ -118,6 +148,11 @@ public class Player : MonoBehaviour
             }
 		}
 
+        if (xVel != 0)
+		{
+            facingLeft = xVel < 0;
+		}
+
         float yVel;
 
         bool onGround = CheckSide(4, 3, Vector2.down);
@@ -132,14 +167,20 @@ public class Player : MonoBehaviour
             canJump = true;
             canDoubleJump = true;
 
+            if (rb.velocity.y < 0)
+            {
+                if (isSlamming)
+				{
+                    //PlaySound(slamLandSound);
+				}
+                //PlaySound(landSound);
+            }
+
             isSlamming = false;
             xForce = 0;
             yVel = 0;
 
-            if (rb.velocity.y < 0)
-            {
-                //PlaySound(bonkSound);
-            }
+            animState = xVel == 0 ? AnimState.STAND : AnimState.RUN;
         }
         else
 		{
@@ -149,6 +190,11 @@ public class Player : MonoBehaviour
 			{
                 StartCoroutine(LeaveGround());
 			}
+
+            if (yVel < 0)
+			{
+                animState = AnimState.FALL;
+            }
         }
         wasOnGround = onGround;
 
@@ -170,6 +216,7 @@ public class Player : MonoBehaviour
                 canJump = false;
                 yVel = jumpForce; //Mathf.Max(jumpForce, yVel + jumpForce);
                 //PlaySound(jumpSound);
+                animState = AnimState.JUMP;
             }
             else if (canDoubleJump)
             {
@@ -178,20 +225,24 @@ public class Player : MonoBehaviour
                 yVel = doubleJumpForce; //Mathf.Max(doubleJumpForce, yVel + doubleJumpForce);
                 //PlaySound(doubleJumpSound);
                 canDoubleJump = false;
-			}
+                isSlamming = false;
+                animState = AnimState.FLAP;
+            }
         }
 
         if (slamQueued)
 		{
             slamQueued = false;
-            print("slam");
             isSlamming = true;
 		}
 
         if (isSlamming)
 		{
             yVel = -slamSpeed;
-		}
+            xVel = 0;
+            xForce = 0;
+            animState = AnimState.SLAM;
+        }
 
         Vector2 vel = new Vector2(xVel, yVel);
         rb.velocity = vel;
@@ -242,7 +293,6 @@ public class Player : MonoBehaviour
             Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
             Vector2 bouncerPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
             Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;
-            print(bouncerToPlayer);
             float bounceYVel = -rb.velocity.y * bouncer.bounceForce * Mathf.Abs(bouncerToPlayer.y);
             if (bouncerToPlayer.y >= 0 && bounceYVel < minBounceForce)
 			{
@@ -254,8 +304,8 @@ public class Player : MonoBehaviour
             }
             float bounceXVel = Mathf.Abs(rb.velocity.y) * bouncer.bounceForce * bouncerToPlayer.x;
             xForce = bounceXVel;
-            print("bounce " + bounceXVel + ", " + bounceYVel);
             rb.velocity = new Vector2(bounceXVel, bounceYVel);
+            animState = AnimState.JUMP;
         }
     }
 
@@ -282,5 +332,54 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpGraceTime);
         canJump = false;
+    }
+
+    private Sprite GetAnimSprite()
+    {
+        switch (animState)
+        {
+            case AnimState.STAND:
+                return standSprite;
+            case AnimState.RUN:
+                return runSprites[animFrame];
+            case AnimState.JUMP:
+                return jumpSprite;
+            case AnimState.FLAP:
+                return flapSprite;
+            case AnimState.FALL:
+                return fallSprite;
+            case AnimState.SLAM:
+                return slamSprite;
+        }
+        return standSprite;
+    }
+
+    private void AdvanceAnim()
+    {
+        if (animState == AnimState.RUN)
+        {
+            frameTime = runFrameTime;
+            AdvanceFrame(runSprites.Length);
+        }
+        else
+        {
+            animFrame = 0;
+            frameTimer = frameTime;
+        }
+    }
+
+    private void AdvanceFrame(int numFrames)
+    {
+        if (animFrame >= numFrames)
+        {
+            animFrame = 0;
+        }
+
+        frameTimer -= Time.deltaTime;
+        if (frameTimer <= 0)
+        {
+            frameTimer = frameTime;
+            animFrame = (animFrame + 1) % numFrames;
+        }
     }
 }

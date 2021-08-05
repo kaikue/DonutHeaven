@@ -15,6 +15,7 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 	- Fall
 	- Slam
 - Mechanics
+	- midair swoop?
 	- double jump (flap)
 		- crystals to refill double jump in midair
 	- downslam
