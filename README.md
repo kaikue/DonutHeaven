@@ -7,6 +7,13 @@ For AGBIC 2021: https://itch.io/jam/a-game-by-its-cover-2021
 Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 
 ## TODO
+- Player animation
+	- Stand
+	- Run
+	- Jump
+	- Flap
+	- Fall
+	- Slam
 - Mechanics
 	- double jump (flap)
 		- crystals to refill double jump in midair
@@ -16,23 +23,40 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- combat?
 	- collect sprinkles
 - Art
-	- Player
-		- Stand
-		- Run
-		- Jump
-		- Flap
 	- Level
 		- Donut bouncers
-		- Sprinkles
-		- Double jump refill ?
-	- Enemies?
+		- Cotton candy bouncy clouds
+		- Collectible sprinkles
+		- Double jump refill candy
+	- Enemies? (demons)
+	- Menu
+		- Title screen
+		- Buttons
+		- End screen
+- Sound
+	- Music
+		- Title
+		- Level
+		- End
+	- Walk
+	- Jump
+	- Flap (double jump)
+	- Land
+	- Start slam
+	- Hit ground from slam
+	- Refill jump crystal
+	- Collect sprinkle
+	- Bounce
+	- Hurt
 - Juice
 	- Short pause before slam
+	- Slam particles
 	- Bouncers jiggle when bounced on
 - levels:
 	- cake cliffs
 	- jelly swamp
-	- donut heaven (boss?)
+	- candy forest (branching candycane trees)
+	- donut heaven (boss- lord licorice?)
 	- keep momentum- speedrun routes
 - ending
 	- other angels: frosting (dark skin pink hair), cinnamon
