@@ -6,22 +6,26 @@ public class Player : MonoBehaviour
 {
     private enum AnimState
     {
-        STAND,
-        RUN,
-        JUMP,
-        FLAP,
-        FALL,
-        SLAM
+        Stand,
+        Run,
+        Jump,
+        Flap,
+        Fall,
+        Slam,
+        Dash
     }
 
     private const float runAcceleration = 20;
     private const float maxRunSpeed = 9;
     private const float jumpForce = 10;
-    private const float doubleJumpForce = 10;
+    private const float doubleJumpForce = 15;
     private const float gravityForce = 20;
     private const float maxFallSpeed = 30;
     private const float slamSpeed = 35;
-    private const float minBounceForce = 5;
+    private const float slamHoldTime = 0.3f;
+    private const float dashForce = 40;
+    private const float dashTime = 0.5f;
+    private const float minBounceForce = 10;
 
     private Rigidbody2D rb;
     private EdgeCollider2D ec;
@@ -29,8 +33,13 @@ public class Player : MonoBehaviour
     private bool triggerWasHeld = false;
     private bool jumpQueued = false;
     private bool slamQueued = false;
+    private bool dashQueued = false;
     private bool canDoubleJump = true;
     private bool isSlamming = false;
+    private float slamHeldTime = 0;
+    private bool canDash = true;
+    private float dashCountdown = 0;
+    private float currentDashForce = 0;
     private float xForce = 0;
 
     private bool canJump = false;
@@ -41,27 +50,27 @@ public class Player : MonoBehaviour
 
     private const float runFrameTime = 0.1f;
     private SpriteRenderer sr;
-    private AnimState animState = AnimState.STAND;
+    private AnimState animState = AnimState.Stand;
     private int animFrame = 0;
     private float frameTime; //max time of frame
     private float frameTimer; //goes from frameTime down to 0
     private bool facingLeft = false; //for animation (images face right)
     public Sprite standSprite;
-    public Sprite runSprite1;
-    public Sprite runSprite2;
-    public Sprite runSprite3;
     public Sprite jumpSprite;
     public Sprite flapSprite;
     public Sprite fallSprite;
     public Sprite slamSprite;
-    private Sprite[] runSprites;
+    public Sprite dashSprite;
+    public Sprite[] runSprites;
+
+    [HideInInspector]
+    public int sprinkles = 0;
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         ec = gameObject.GetComponent<EdgeCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
-        runSprites = new Sprite[] { runSprite1, runSprite2, runSprite3, runSprite2 };
     }
 
     private void Update()
@@ -72,6 +81,11 @@ public class Player : MonoBehaviour
             jumpQueued = true;
             crtCancelQueuedJump = StartCoroutine(CancelQueuedJump());
         }
+
+        if (Input.GetButtonDown("Dash"))
+		{
+            dashQueued = true;
+		}
 
         bool triggerHeld = Input.GetAxis("LTrigger") > 0 || Input.GetAxis("RTrigger") > 0;
         bool triggerPressed = !triggerWasHeld && triggerHeld;
@@ -88,8 +102,8 @@ public class Player : MonoBehaviour
 
     private bool CheckSide(int point0, int point1, Vector2 direction)
     {
-        Vector2 startPoint = rb.position + ec.points[point0] + direction * 0.1f;
-        Vector2 endPoint = rb.position + ec.points[point1] + direction * 0.1f;
+        Vector2 startPoint = rb.position + ec.points[point0] + direction * 0.02f;
+        Vector2 endPoint = rb.position + ec.points[point1] + direction * 0.02f;
         RaycastHit2D hit = Physics2D.Raycast(startPoint, endPoint - startPoint, Vector2.Distance(startPoint, endPoint), LayerMask.GetMask("Tiles"));
         return hit.collider != null;
     }
@@ -148,10 +162,14 @@ public class Player : MonoBehaviour
             }
 		}
 
-        if (xVel != 0)
-		{
+        if (xInput != 0)
+        {
+            facingLeft = xInput < 0;
+        }
+        else if (xVel != 0)
+        {
             facingLeft = xVel < 0;
-		}
+        }
 
         float yVel;
 
@@ -166,6 +184,7 @@ public class Player : MonoBehaviour
             }*/
             canJump = true;
             canDoubleJump = true;
+            canDash = true;
 
             if (rb.velocity.y < 0)
             {
@@ -180,7 +199,7 @@ public class Player : MonoBehaviour
             xForce = 0;
             yVel = 0;
 
-            animState = xVel == 0 ? AnimState.STAND : AnimState.RUN;
+            animState = xVel == 0 ? AnimState.Stand : AnimState.Run;
         }
         else
 		{
@@ -193,7 +212,7 @@ public class Player : MonoBehaviour
 
             if (yVel < 0)
 			{
-                animState = AnimState.FALL;
+                animState = AnimState.Fall;
             }
         }
         wasOnGround = onGround;
@@ -216,7 +235,7 @@ public class Player : MonoBehaviour
                 canJump = false;
                 yVel = jumpForce; //Mathf.Max(jumpForce, yVel + jumpForce);
                 //PlaySound(jumpSound);
-                animState = AnimState.JUMP;
+                animState = AnimState.Jump;
             }
             else if (canDoubleJump)
             {
@@ -226,49 +245,70 @@ public class Player : MonoBehaviour
                 //PlaySound(doubleJumpSound);
                 canDoubleJump = false;
                 isSlamming = false;
-                animState = AnimState.FLAP;
+                animState = AnimState.Flap;
             }
         }
+
+        if (dashQueued)
+		{
+            dashQueued = false;
+            if (!onGround && canDash)
+			{
+                canDash = false;
+                dashCountdown = dashTime;
+                currentDashForce = dashForce * (facingLeft ? -1 : 1);
+                xForce = currentDashForce;
+                yVel = 0;
+                isSlamming = false;
+                animState = AnimState.Dash;
+            }
+		}
+
+        if (dashCountdown > 0)
+		{
+            dashCountdown -= Time.fixedDeltaTime;
+            if (dashCountdown < Time.fixedDeltaTime)
+			{
+                xForce = 0;
+			}
+            else
+			{
+                xForce = Mathf.Lerp(0, currentDashForce, dashCountdown / dashTime);
+            }
+		}
 
         if (slamQueued)
 		{
             slamQueued = false;
-            isSlamming = true;
+            if (!onGround && !isSlamming)
+            {
+                isSlamming = true;
+                slamHeldTime = 0;
+                dashCountdown = 0;
+            }
 		}
 
         if (isSlamming)
 		{
-            yVel = -slamSpeed;
             xVel = 0;
             xForce = 0;
-            animState = AnimState.SLAM;
+
+            if (slamHeldTime < slamHoldTime)
+			{
+                slamHeldTime += Time.fixedDeltaTime;
+                yVel = 0;
+			}
+            else
+			{
+                yVel = -slamSpeed;
+            }
+
+            animState = AnimState.Slam;
         }
 
         Vector2 vel = new Vector2(xVel, yVel);
         rb.velocity = vel;
         rb.MovePosition(rb.position + vel * Time.fixedDeltaTime);
-
-        /*if (!onGround)
-        {
-            sr.sprite = walkImage;
-        }
-        else
-        {
-            if (xVel != 0)
-            {
-                sr.sprite = isStepping ? walkImage : standImage;
-                timeSinceLastStep += Time.fixedDeltaTime;
-                if (timeSinceLastStep > stepTime)
-                {
-                    timeSinceLastStep = 0;
-                    isStepping = !isStepping;
-                }
-            }
-            else
-            {
-                sr.sprite = standImage;
-            }
-        }*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -289,11 +329,13 @@ public class Player : MonoBehaviour
         {
             //PlaySound(bounceSound);
             isSlamming = false;
+            dashCountdown = 0;
             canDoubleJump = true;
+            canDash = true;
             Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
             Vector2 bouncerPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
             Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;
-            float bounceYVel = -rb.velocity.y * bouncer.bounceForce * Mathf.Abs(bouncerToPlayer.y);
+            float bounceYVel = rb.velocity.magnitude * bouncer.bounceForce * bouncerToPlayer.y;
             if (bouncerToPlayer.y >= 0 && bounceYVel < minBounceForce)
 			{
                 bounceYVel = minBounceForce;
@@ -302,10 +344,37 @@ public class Player : MonoBehaviour
             {
                 bounceYVel = -minBounceForce;
             }
-            float bounceXVel = Mathf.Abs(rb.velocity.y) * bouncer.bounceForce * bouncerToPlayer.x;
+            float bounceXVel = rb.velocity.magnitude * bouncer.bounceForce * bouncerToPlayer.x;
             xForce = bounceXVel;
             rb.velocity = new Vector2(bounceXVel, bounceYVel);
-            animState = AnimState.JUMP;
+            animState = AnimState.Jump;
+        }
+    }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        GameObject collider = collision.gameObject;
+
+        CollectibleSprinkle sprinkle = collider.GetComponent<CollectibleSprinkle>();
+        if (sprinkle != null)
+		{
+            Destroy(collider);
+            sprinkles++;
+		}
+
+        RefillCrystal refill = collider.GetComponent<RefillCrystal>();
+        if (refill != null)
+        {
+            switch (refill.refillType)
+            {
+                case RefillCrystal.RefillType.Jump:
+                    canDoubleJump = true;
+                    break;
+                case RefillCrystal.RefillType.Dash:
+                    canDash = true;
+                    break;
+			}
+            refill.Use();
         }
     }
 
@@ -338,25 +407,27 @@ public class Player : MonoBehaviour
     {
         switch (animState)
         {
-            case AnimState.STAND:
+            case AnimState.Stand:
                 return standSprite;
-            case AnimState.RUN:
+            case AnimState.Run:
                 return runSprites[animFrame];
-            case AnimState.JUMP:
+            case AnimState.Jump:
                 return jumpSprite;
-            case AnimState.FLAP:
+            case AnimState.Flap:
                 return flapSprite;
-            case AnimState.FALL:
+            case AnimState.Fall:
                 return fallSprite;
-            case AnimState.SLAM:
+            case AnimState.Slam:
                 return slamSprite;
+            case AnimState.Dash:
+                return dashSprite;
         }
         return standSprite;
     }
 
     private void AdvanceAnim()
     {
-        if (animState == AnimState.RUN)
+        if (animState == AnimState.Run)
         {
             frameTime = runFrameTime;
             AdvanceFrame(runSprites.Length);

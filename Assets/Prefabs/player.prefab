@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1640383635
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b277f4b61d469634e9db109c70b9e8a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,11 +101,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.215, y: -0.905}
-  - {x: -0.215, y: 0.6}
-  - {x: 0.28, y: 0.6}
-  - {x: 0.28, y: -0.905}
-  - {x: -0.215, y: -0.905}
+  - {x: -0.25, y: -0.875}
+  - {x: -0.25, y: 0.625}
+  - {x: 0.25, y: 0.625}
+  - {x: 0.25, y: -0.875}
+  - {x: -0.25, y: -0.875}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -144,10 +144,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standSprite: {fileID: 21300000, guid: b277f4b61d469634e9db109c70b9e8a0, type: 3}
-  runSprite1: {fileID: 21300000, guid: bae53194d3c86634880950ef0eba83d2, type: 3}
-  runSprite2: {fileID: 21300000, guid: 9e42bd4ead5fa8c46af28a22bdfcfc39, type: 3}
-  runSprite3: {fileID: 21300000, guid: fa820443ef5763f46a279fd587928ba7, type: 3}
   jumpSprite: {fileID: 21300000, guid: 4b369eabf34ee944ca146faaa6f31403, type: 3}
   flapSprite: {fileID: 21300000, guid: 72463f795b16c8745a4c348dc03c84f8, type: 3}
   fallSprite: {fileID: 21300000, guid: c897b8235f011fe49962f81ba14f8f4b, type: 3}
   slamSprite: {fileID: 21300000, guid: b8360c8aa2f58c04cadb4881aaaee2db, type: 3}
+  dashSprite: {fileID: 21300000, guid: 09770584a1a904c48beb956f5b003b82, type: 3}
+  runSprites:
+  - {fileID: 21300000, guid: bae53194d3c86634880950ef0eba83d2, type: 3}
+  - {fileID: 21300000, guid: 9e42bd4ead5fa8c46af28a22bdfcfc39, type: 3}
+  - {fileID: 21300000, guid: fa820443ef5763f46a279fd587928ba7, type: 3}
+  - {fileID: 21300000, guid: 9e42bd4ead5fa8c46af28a22bdfcfc39, type: 3}
+  sprinkles: 0
