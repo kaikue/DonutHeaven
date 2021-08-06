@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     private const float dashForce = 40;
     private const float dashTime = 0.5f;
     private const float minBounceForce = 10;
+    private const float minBreakXForce = 10;
+    private const float breakRecoilForce = 5;
 
     private Rigidbody2D rb;
     private EdgeCollider2D ec;
@@ -100,12 +102,18 @@ public class Player : MonoBehaviour
         sr.sprite = GetAnimSprite();
     }
 
+    private Collider2D RaycastTiles(Vector2 startPoint, Vector2 endPoint)
+	{
+        RaycastHit2D hit = Physics2D.Raycast(startPoint, endPoint - startPoint, Vector2.Distance(startPoint, endPoint), LayerMask.GetMask("Tiles"));
+        return hit.collider;
+    }
+
     private bool CheckSide(int point0, int point1, Vector2 direction)
     {
         Vector2 startPoint = rb.position + ec.points[point0] + direction * 0.02f;
         Vector2 endPoint = rb.position + ec.points[point1] + direction * 0.02f;
-        RaycastHit2D hit = Physics2D.Raycast(startPoint, endPoint - startPoint, Vector2.Distance(startPoint, endPoint), LayerMask.GetMask("Tiles"));
-        return hit.collider != null;
+        Collider2D collider = RaycastTiles(startPoint, endPoint);
+        return collider != null;
     }
 
     private void FixedUpdate()
@@ -168,7 +176,7 @@ public class Player : MonoBehaviour
         }
         else if (xVel != 0)
         {
-            facingLeft = xVel < 0;
+            //facingLeft = xVel < 0;
         }
 
         float yVel;
@@ -178,13 +186,23 @@ public class Player : MonoBehaviour
 
         if (onGround)
         {
-            /*if (!canDoubleJump)
-            {
-                PlaySound(rechargeDoubleJumpSound);
-            }*/
             canJump = true;
             canDoubleJump = true;
-            canDash = true;
+            isSlamming = false;
+
+            if (!wasOnGround || dashCountdown == 0)
+            {
+                canDash = true;
+			}
+
+            if (xForce != 0)
+			{
+                xForce *= 0.8f;
+                if (Mathf.Abs(xForce) < 0.05f)
+				{
+                    xForce = 0;
+				}
+			}
 
             if (rb.velocity.y < 0)
             {
@@ -195,8 +213,6 @@ public class Player : MonoBehaviour
                 //PlaySound(landSound);
             }
 
-            isSlamming = false;
-            xForce = 0;
             yVel = 0;
 
             animState = xVel == 0 ? AnimState.Stand : AnimState.Run;
@@ -252,7 +268,7 @@ public class Player : MonoBehaviour
         if (dashQueued)
 		{
             dashQueued = false;
-            if (!onGround && canDash)
+            if (canDash)
 			{
                 canDash = false;
                 dashCountdown = dashTime;
@@ -269,6 +285,7 @@ public class Player : MonoBehaviour
             dashCountdown -= Time.fixedDeltaTime;
             if (dashCountdown < Time.fixedDeltaTime)
 			{
+                dashCountdown = 0;
                 xForce = 0;
 			}
             else
@@ -303,7 +320,34 @@ public class Player : MonoBehaviour
                 yVel = -slamSpeed;
             }
 
+            Vector2 startPoint = rb.position;
+            Vector2 endPoint = rb.position + (ec.points[0].y + 1.5f * yVel * Time.fixedDeltaTime) * Vector2.up;
+            Collider2D collider = RaycastTiles(startPoint, endPoint);
+            if (collider != null && collider.CompareTag("Breakable"))
+			{
+                Destroy(collider.gameObject);
+                isSlamming = false;
+                canDoubleJump = true;
+                canDash = true;
+                yVel = breakRecoilForce;
+            }
+
             animState = AnimState.Slam;
+        }
+
+        if (Mathf.Abs(xForce) >= minBreakXForce)
+		{
+            float offset = 1.5f * xForce * Time.fixedDeltaTime;// * Vector2.right;
+            Vector2 startPoint = rb.position;// + ec.points[xForce > 0 ? 2 : 1] + offset;
+            Vector2 endPoint = rb.position + (ec.points[xForce > 0 ? 2 : 1].x + offset) * Vector2.right;// + ec.points[xForce > 0 ? 3 : 0] + offset;
+            Collider2D collider = RaycastTiles(startPoint, endPoint);
+            if (collider != null && collider.CompareTag("Breakable"))
+            {
+                Destroy(collider.gameObject);
+                xForce = -Mathf.Sign(xForce) * breakRecoilForce;
+                xVel = xForce;
+                dashCountdown = 0;
+            }
         }
 
         Vector2 vel = new Vector2(xVel, yVel);
@@ -363,7 +407,7 @@ public class Player : MonoBehaviour
 		}
 
         RefillCrystal refill = collider.GetComponent<RefillCrystal>();
-        if (refill != null)
+        if (refill != null && refill.isUsable)
         {
             switch (refill.refillType)
             {

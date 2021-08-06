@@ -9,13 +9,19 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 ## TODO
 - Mechanics
 	- Camera- cinemachine
-	- Slam/dash
-		- Break sugar barriers
-		- Combat
+	- Hazards
+		- On touch player- respawn at last checkpoint
+		- Candy cane spikes?
+		- Falling ???
 	- Enemies
-		- Walk back and forth on platform- turn around if hit wall or edge
+		- Movement patterns
+			- Walk back and forth on platform- turn around if hit wall or edge
+			- Walk along all edges of platform
+		- Slam/dash combat
+			- Bounce away only for enemies with multiple HP
+	- Show collected sprinkles (some total in each level)
 - Art
-	- Gray out wings if can't double jump, gray out donut halo if can't dash (separate out wings & donut halo)
+	- Gray out wings if can't double jump, gray out donut halo if can't dash (separate out donut halo, duplicate fall/slam/dash sprites)
 	- Player start slam animation
 	- Level
 		- Tiles
@@ -29,10 +35,16 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 			- Swirly brown sticks
 			- Peppermint swirls
 			- Candy canes
-	- Enemies? (demons)
+	- Enemies
+		- Jelly slime
+		- Licorice spiky bug
+		- other candy demon guys
 	- Menu
 		- Title screen
 		- Buttons
+		- Intro cutscene
+		- Boss conversation
+		- End cutscene
 		- End screen
 - Sound
 	- Music
@@ -48,18 +60,21 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 	- Dash
 	- Refill jump/dash crystal
 	- Collect sprinkle
+	- Smash sugar barrier
 	- Bounce
 	- Hurt
 	- Enemy
 - Juice
 	- Slam particles
 	- Dash effects
+	- Smash sugar barrier particles
 	- Collect sprinkle particles
 	- Bouncers jiggle when bounced on
 - Levels
 	- Level 1- Frosted Fields
 		- Introduce jump
 		- Introduce double jump
+		- Introduce static hazards
 		- Introduce bouncers
 	- Level 2- Jelly Swamp (patches of bouncy floor)
 		- Introduce slam
@@ -68,6 +83,7 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Introduce combat
 	- Level 3- Lollipop Forest (lollipop & candycane trees)
 		- Introduce slam bounce (on round bouncers)
+		- Introduce falling hazards
 		- Introduce double jump refill
 	- Level 4- Cake Cliffs
 		- Introduce dash
@@ -75,12 +91,14 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Introduce dash combat?
 		- Introduce dash bounce
 		- Introduce dash refill crystal
-	- Level 5- ? Ascent (vertical climb)
-	- Level Final- Donut Heaven
+	- another level if I have time
+	- Level 5- Chocolate Mountain (vertical climb, lava rivers)
+		- Dash through multiple barriers hanging off ceiling
+	- Level 6- Donut Heaven
 		- Castle
 		- Boss- Lord Licorice
-	- cake cliffs
-	- candy forest (branching candycane trees)
 	- keep momentum- speedrun routes
+	- secret sprinkles in early levels where you have to use future mechanics
 - Ending
 	- other angels: frosting (dark skin pink hair), cinnamon
+	- special ending for collected all sprinkles
