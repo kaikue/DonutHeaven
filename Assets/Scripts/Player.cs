@@ -102,7 +102,14 @@ public class Player : MonoBehaviour
         sr.sprite = GetAnimSprite();
     }
 
-    private Collider2D RaycastTiles(Vector2 startPoint, Vector2 endPoint)
+    private Collider2D BoxcastTiles(Vector2 direction, float distance)
+	{
+        Vector2 size = new Vector2(ec.points[2].x - ec.points[1].x, ec.points[1].y - ec.points[0].y);
+        RaycastHit2D hit = Physics2D.BoxCast(rb.position, size, 0, direction, distance, LayerMask.GetMask("Tiles"));
+        return hit.collider;
+    }
+
+    /*private Collider2D RaycastTiles(Vector2 startPoint, Vector2 endPoint)
 	{
         RaycastHit2D hit = Physics2D.Raycast(startPoint, endPoint - startPoint, Vector2.Distance(startPoint, endPoint), LayerMask.GetMask("Tiles"));
         return hit.collider;
@@ -114,7 +121,7 @@ public class Player : MonoBehaviour
         Vector2 endPoint = rb.position + ec.points[point1] + direction * 0.02f;
         Collider2D collider = RaycastTiles(startPoint, endPoint);
         return collider != null;
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -181,8 +188,8 @@ public class Player : MonoBehaviour
 
         float yVel;
 
-        bool onGround = CheckSide(4, 3, Vector2.down);
-        bool onCeiling = CheckSide(1, 2, Vector2.up);
+        bool onGround = BoxcastTiles(Vector2.down, 0.15f) != null; //CheckSide(4, 3, Vector2.down);
+        bool onCeiling = BoxcastTiles(Vector2.up, 0.15f) != null; //CheckSide(1, 2, Vector2.up);
 
         if (onGround)
         {
@@ -320,9 +327,7 @@ public class Player : MonoBehaviour
                 yVel = -slamSpeed;
             }
 
-            Vector2 startPoint = rb.position;
-            Vector2 endPoint = rb.position + (ec.points[0].y + 1.5f * yVel * Time.fixedDeltaTime) * Vector2.up;
-            Collider2D collider = RaycastTiles(startPoint, endPoint);
+            Collider2D collider = BoxcastTiles(Vector2.up, 1.5f * yVel * Time.fixedDeltaTime);
             if (collider != null && collider.CompareTag("Breakable"))
 			{
                 Destroy(collider.gameObject);
@@ -337,10 +342,7 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(xForce) >= minBreakXForce)
 		{
-            float offset = 1.5f * xForce * Time.fixedDeltaTime;// * Vector2.right;
-            Vector2 startPoint = rb.position;// + ec.points[xForce > 0 ? 2 : 1] + offset;
-            Vector2 endPoint = rb.position + (ec.points[xForce > 0 ? 2 : 1].x + offset) * Vector2.right;// + ec.points[xForce > 0 ? 3 : 0] + offset;
-            Collider2D collider = RaycastTiles(startPoint, endPoint);
+            Collider2D collider = BoxcastTiles(Vector2.right, 1.5f * xForce * Time.fixedDeltaTime);
             if (collider != null && collider.CompareTag("Breakable"))
             {
                 Destroy(collider.gameObject);
@@ -364,7 +366,9 @@ public class Player : MonoBehaviour
             if (collision.GetContact(0).normal.x != 0)
             {
                 //against wall, not ceiling
+                //PlaySound(bonkSound);
                 xForce = 0;
+                dashCountdown = 0;
             }
         }
 
@@ -376,19 +380,20 @@ public class Player : MonoBehaviour
             dashCountdown = 0;
             canDoubleJump = true;
             canDash = true;
-            Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
+            /*Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
             Vector2 bouncerPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
-            Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;
-            float bounceYVel = rb.velocity.magnitude * bouncer.bounceForce * bouncerToPlayer.y;
-            if (bouncerToPlayer.y >= 0 && bounceYVel < minBounceForce)
+            Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;*/
+            Vector2 normal = collision.GetContact(0).normal;
+            float bounceYVel = rb.velocity.magnitude * bouncer.bounceForce * normal.y;
+            if (normal.y >= 0 && bounceYVel < minBounceForce)
 			{
                 bounceYVel = minBounceForce;
             }
-            if (bouncerToPlayer.y < 0 && bounceYVel > -minBounceForce)
+            if (normal.y < 0 && bounceYVel > -minBounceForce)
             {
                 bounceYVel = -minBounceForce;
             }
-            float bounceXVel = rb.velocity.magnitude * bouncer.bounceForce * bouncerToPlayer.x;
+            float bounceXVel = rb.velocity.magnitude * bouncer.bounceForce * normal.x;
             xForce = bounceXVel;
             rb.velocity = new Vector2(bounceXVel, bounceYVel);
             animState = AnimState.Jump;

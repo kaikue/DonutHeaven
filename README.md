@@ -54,7 +54,7 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 	- Walk
 	- Jump
 	- Flap (double jump)
-	- Land
+	- Land/hit ceiling/hit wall
 	- Start slam
 	- Hit ground from slam
 	- Dash
@@ -72,20 +72,23 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 	- Bouncers jiggle when bounced on
 - Levels
 	- Level 1- Frosted Fields
+		- Terrain- light brown gingerbread with pink/blue frosting; donuts; light blue background with hills
 		- Introduce jump
 		- Introduce double jump
 		- Introduce static hazards
 		- Introduce bouncers
 	- Level 2- Jelly Swamp (patches of bouncy floor)
-		- Introduce slam
-		- Introduce slam bounce (on jelly floors)
+		- Terrain- dark brown with light brown frosting; all-red jelly patches; purple background
 		- Introduce slam break floor
+		- Introduce slam bounce (on jelly floors)
 		- Introduce combat
 	- Level 3- Lollipop Forest (lollipop & candycane trees)
+		- Terrain- pink with dark brown frosting
 		- Introduce slam bounce (on round bouncers)
 		- Introduce falling hazards
 		- Introduce double jump refill
 	- Level 4- Cake Cliffs
+		- Terrain- red with white frosting
 		- Introduce dash
 		- Introduce dash break wall
 		- Introduce dash combat?
@@ -93,12 +96,15 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Introduce dash refill crystal
 	- another level if I have time
 	- Level 5- Chocolate Mountain (vertical climb, lava rivers)
+		- Terrain- brown chocolate squares; dark brown lava rivers
 		- Dash through multiple barriers hanging off ceiling
 	- Level 6- Donut Heaven
+		- Outside terrain- cotton candy clouds, donuts, dark blue space background w/ stars
+		- Inside terrain- dark brown with pink frosting
 		- Castle
 		- Boss- Lord Licorice
 	- keep momentum- speedrun routes
 	- secret sprinkles in early levels where you have to use future mechanics
 - Ending
 	- other angels: frosting (dark skin pink hair), cinnamon
-	- special ending for collected all sprinkles
+	- special plumpy ending for collected all sprinkles
