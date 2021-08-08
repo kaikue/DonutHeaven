@@ -8,7 +8,6 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 
 ## TODO
 - Bugs
-	- fix screenshake leaving camera rotated- try the impulse source thing
 	- fix occasional camera jitter?
 		- occasionally deactivate+reactivate vcam?
 - Mechanics
@@ -81,17 +80,17 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Introduce static hazards
 		- Introduce bouncers
 	- Level 2- Jelly Swamp (patches of bouncy floor)
-		- Terrain- dark brown with light brown frosting; all-red jelly patches; purple background
+		- Terrain- dark brown with light brown frosting; all-red jelly patches; purple background with trees
 		- Introduce slam break floor
 		- Introduce slam bounce (on jelly floors)
 		- Introduce combat
 	- Level 3- Lollipop Forest (lollipop & candycane trees)
-		- Terrain- pink with dark brown frosting
+		- Terrain- pink with dark brown frosting, pink background with trees
 		- Introduce slam bounce (on round bouncers)
 		- Introduce falling hazards
 		- Introduce double jump refill
 	- Level 4- Cake Cliffs
-		- Terrain- red with white frosting
+		- Terrain- red with white frosting, blue-green background with cake mountains
 		- Introduce dash
 		- Introduce dash break wall
 		- Introduce dash combat?
@@ -99,11 +98,11 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Introduce dash refill crystal
 	- another level if I have time
 	- Level 5- Chocolate Mountain (vertical climb, lava rivers)
-		- Terrain- brown chocolate squares; dark brown lava rivers
+		- Terrain- brown chocolate squares; dark brown lava rivers, yellow background
 		- Dash through multiple barriers hanging off ceiling
 	- Level 6- Donut Heaven
 		- Outside terrain- cotton candy clouds, donuts, dark blue space background w/ stars
-		- Inside terrain- dark brown with pink frosting
+		- Inside terrain- dark brown with pink frosting, light brown walls
 		- Castle
 		- Boss- Lord Licorice
 	- keep momentum- speedrun routes

@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     private const float jumpGraceTime = 0.1f; //time after leaving ground player can still jump (coyote time)
 
     private CinemachineBasicMultiChannelPerlin cameraNoise;
+    private CinemachineImpulseSource impulseSource;
 
     private const float runFrameTime = 0.1f;
     private SpriteRenderer sr;
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour
 
         CinemachineVirtualCamera vcam = Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
         cameraNoise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        impulseSource = gameObject.GetComponent<CinemachineImpulseSource>();
     }
 
     private void Update()
@@ -113,7 +115,7 @@ public class Player : MonoBehaviour
         AdvanceAnim();
         sr.sprite = GetAnimSprite();
 
-        Camera.main.transform.rotation = Quaternion.identity;
+        //Camera.main.transform.rotation = Quaternion.identity;
     }
 
     private Collider2D BoxcastTiles(Vector2 direction, float distance)
@@ -526,8 +528,9 @@ public class Player : MonoBehaviour
 
     private void ScreenShake()
 	{
-        StartCoroutine(ScreenShakeCrt());
-	}
+        //StartCoroutine(ScreenShakeCrt());
+        impulseSource.GenerateImpulse();
+    }
 
     private IEnumerator ScreenShakeCrt()
 	{

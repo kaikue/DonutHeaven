@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 938155036647122884, guid: e07122230aeb1684eba1762853e2041d, type: 3}
       propertyPath: m_Name
-      value: CollectParticles
+      value: CollectParticleBurst
       objectReference: {fileID: 0}
     - target: {fileID: 938155036647122906, guid: e07122230aeb1684eba1762853e2041d, type: 3}
       propertyPath: ShapeModule.radius.value
@@ -18,6 +18,10 @@ PrefabInstance:
     - target: {fileID: 938155036647122906, guid: e07122230aeb1684eba1762853e2041d, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938155036647122906, guid: e07122230aeb1684eba1762853e2041d, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 938155036647122906, guid: e07122230aeb1684eba1762853e2041d, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
