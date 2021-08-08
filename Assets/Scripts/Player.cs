@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     private const float breakRecoilForce = 5;
     private const float screenShakeAmount = 10;
     private const float screenShakeTime = 0.3f;
+    private const float slamParticlesMultiplier = 10;
+    private const float dashParticlesMultiplier = 10;
 
     private Rigidbody2D rb;
     private EdgeCollider2D ec;
@@ -70,6 +72,8 @@ public class Player : MonoBehaviour
     public Sprite dashSprite;
     public Sprite[] runSprites;
 
+    public GameObject particleBurst;
+
     [HideInInspector]
     public int sprinkles = 0;
 
@@ -108,6 +112,8 @@ public class Player : MonoBehaviour
         sr.flipX = facingLeft;
         AdvanceAnim();
         sr.sprite = GetAnimSprite();
+
+        Camera.main.transform.rotation = Quaternion.identity;
     }
 
     private Collider2D BoxcastTiles(Vector2 direction, float distance)
@@ -224,6 +230,7 @@ public class Player : MonoBehaviour
 				{
                     //PlaySound(slamLandSound);
                     ScreenShake();
+                    Instantiate(particleBurst, transform.position, Quaternion.identity);
                 }
                 //PlaySound(landSound);
             }
@@ -337,14 +344,15 @@ public class Player : MonoBehaviour
             }
 
             Collider2D collider = BoxcastTiles(Vector2.up, 1.5f * yVel * Time.fixedDeltaTime);
-            if (collider != null && collider.CompareTag("Breakable"))
+            if (collider != null && collider.GetComponent<Breakable>() != null)
 			{
-                Destroy(collider.gameObject);
+                collider.GetComponent<Breakable>().Break();
                 isSlamming = false;
                 canDoubleJump = true;
                 canDash = true;
                 yVel = breakRecoilForce;
                 ScreenShake();
+                Instantiate(particleBurst, transform.position, Quaternion.identity);
             }
 
             animState = AnimState.Slam;
@@ -353,13 +361,14 @@ public class Player : MonoBehaviour
         if (Mathf.Abs(xForce) >= minBreakXForce)
 		{
             Collider2D collider = BoxcastTiles(Vector2.right, 1.5f * xForce * Time.fixedDeltaTime);
-            if (collider != null && collider.CompareTag("Breakable"))
+            if (collider != null && collider.GetComponent<Breakable>() != null)
             {
-                Destroy(collider.gameObject);
+                collider.GetComponent<Breakable>().Break();
                 xForce = -Mathf.Sign(xForce) * breakRecoilForce;
                 xVel = xForce;
                 dashCountdown = 0;
                 ScreenShake();
+                Instantiate(particleBurst, transform.position, Quaternion.identity);
             }
         }
 
@@ -418,6 +427,7 @@ public class Player : MonoBehaviour
         CollectibleSprinkle sprinkle = collider.GetComponent<CollectibleSprinkle>();
         if (sprinkle != null)
 		{
+            sprinkle.Collect();
             Destroy(collider);
             sprinkles++;
 		}

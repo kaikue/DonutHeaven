@@ -7,11 +7,15 @@ For AGBIC 2021: https://itch.io/jam/a-game-by-its-cover-2021
 Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 
 ## TODO
+- Bugs
+	- fix screenshake leaving camera rotated- try the impulse source thing
+	- fix occasional camera jitter?
+		- occasionally deactivate+reactivate vcam?
 - Mechanics
 	- Hazards
 		- On touch player- respawn at last checkpoint
 		- Candy cane spikes?
-		- Falling ???
+		- Falling things?
 	- Enemies
 		- Movement patterns
 			- Walk back and forth on platform- turn around if hit wall or edge
@@ -64,11 +68,11 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 	- Hurt
 	- Enemy
 - Juice
-	- Slam particles
-	- Dash effects
-	- Smash sugar barrier particles
-	- Collect sprinkle particles
+	- Slam particles come from collision point
+		- take color of terrain?
 	- Bouncers jiggle when bounced on
+	- Dash start effect
+	- More dash/slam trail effects?
 - Levels
 	- Level 1- Frosted Fields
 		- Terrain- light brown gingerbread with pink/blue frosting; donuts; light blue background with hills

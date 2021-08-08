@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectibleSprinkle : MonoBehaviour
 {
     public Color[] colors;
+    public GameObject collectParticles;
 
     private SpriteRenderer sr;
 
@@ -18,5 +19,12 @@ public class CollectibleSprinkle : MonoBehaviour
         //print(transform.position + " " + seed);
         sr.color = colors[Random.Range(0, colors.Length)];
         sr.flipX = Random.value > 0.5f;
+    }
+
+    public void Collect()
+	{
+        GameObject particles = Instantiate(collectParticles, transform.position, Quaternion.identity);
+        ParticleSystem.MainModule main = particles.GetComponent<ParticleSystem>().main;
+        main.startColor = sr.color;
     }
 }
