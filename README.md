@@ -8,7 +8,6 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 
 ## TODO
 - Mechanics
-	- Camera- cinemachine
 	- Hazards
 		- On touch player- respawn at last checkpoint
 		- Candy cane spikes?
@@ -19,13 +18,11 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 			- Walk along all edges of platform
 		- Slam/dash combat
 			- Bounce away only for enemies with multiple HP
+	- Recharge all crystals whenever touching ground?
 	- Show collected sprinkles (some total in each level)
 - Art
-	- Gray out wings if can't double jump, gray out donut halo if can't dash (separate out donut halo, duplicate fall/slam/dash sprites)
-	- Player start slam animation
 	- Level
 		- Tiles
-		- Donut bouncers
 		- Cotton candy bouncy clouds
 		- Collectible sprinkles
 		- Double jump refill candy
@@ -46,10 +43,12 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Boss conversation
 		- End cutscene
 		- End screen
+	- Gray out wings if can't double jump, gray out donut halo if can't dash (separate out donut halo, duplicate fall/slam/dash sprites)
+	- Player start slam animation
 - Sound
 	- Music
 		- Title
-		- Level
+		- Levels
 		- End
 	- Walk
 	- Jump

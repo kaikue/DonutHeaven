@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     }
 
     private const float runAcceleration = 20;
-    private const float maxRunSpeed = 9;
+    public const float maxRunSpeed = 9;
     private const float jumpForce = 10;
     private const float doubleJumpForce = 15;
     private const float gravityForce = 20;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
     private const float minBounceForce = 10;
     private const float minBreakXForce = 10;
     private const float breakRecoilForce = 5;
+    private const float screenShakeAmount = 10;
+    private const float screenShakeTime = 0.3f;
 
     private Rigidbody2D rb;
     private EdgeCollider2D ec;
@@ -49,6 +52,8 @@ public class Player : MonoBehaviour
     private Coroutine crtCancelQueuedJump;
     private const float jumpBufferTime = 0.1f; //time before hitting ground a jump will still be queued
     private const float jumpGraceTime = 0.1f; //time after leaving ground player can still jump (coyote time)
+
+    private CinemachineBasicMultiChannelPerlin cameraNoise;
 
     private const float runFrameTime = 0.1f;
     private SpriteRenderer sr;
@@ -73,6 +78,9 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         ec = gameObject.GetComponent<EdgeCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
+
+        CinemachineVirtualCamera vcam = Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
+        cameraNoise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     private void Update()
@@ -109,7 +117,7 @@ public class Player : MonoBehaviour
         return hit.collider;
     }
 
-    /*private Collider2D RaycastTiles(Vector2 startPoint, Vector2 endPoint)
+    private Collider2D RaycastTiles(Vector2 startPoint, Vector2 endPoint)
 	{
         RaycastHit2D hit = Physics2D.Raycast(startPoint, endPoint - startPoint, Vector2.Distance(startPoint, endPoint), LayerMask.GetMask("Tiles"));
         return hit.collider;
@@ -121,7 +129,7 @@ public class Player : MonoBehaviour
         Vector2 endPoint = rb.position + ec.points[point1] + direction * 0.02f;
         Collider2D collider = RaycastTiles(startPoint, endPoint);
         return collider != null;
-    }*/
+    }
 
     private void FixedUpdate()
     {
@@ -188,14 +196,13 @@ public class Player : MonoBehaviour
 
         float yVel;
 
-        bool onGround = BoxcastTiles(Vector2.down, 0.15f) != null; //CheckSide(4, 3, Vector2.down);
-        bool onCeiling = BoxcastTiles(Vector2.up, 0.15f) != null; //CheckSide(1, 2, Vector2.up);
+        bool onGround = CheckSide(4, 3, Vector2.down); //BoxcastTiles(Vector2.down, 0.15f) != null;
+        bool onCeiling = CheckSide(1, 2, Vector2.up); //BoxcastTiles(Vector2.up, 0.15f) != null;
 
         if (onGround)
         {
             canJump = true;
             canDoubleJump = true;
-            isSlamming = false;
 
             if (!wasOnGround || dashCountdown == 0)
             {
@@ -216,10 +223,12 @@ public class Player : MonoBehaviour
                 if (isSlamming)
 				{
                     //PlaySound(slamLandSound);
-				}
+                    ScreenShake();
+                }
                 //PlaySound(landSound);
             }
 
+            isSlamming = false;
             yVel = 0;
 
             animState = xVel == 0 ? AnimState.Stand : AnimState.Run;
@@ -335,6 +344,7 @@ public class Player : MonoBehaviour
                 canDoubleJump = true;
                 canDash = true;
                 yVel = breakRecoilForce;
+                ScreenShake();
             }
 
             animState = AnimState.Slam;
@@ -349,6 +359,7 @@ public class Player : MonoBehaviour
                 xForce = -Mathf.Sign(xForce) * breakRecoilForce;
                 xVel = xForce;
                 dashCountdown = 0;
+                ScreenShake();
             }
         }
 
@@ -502,4 +513,26 @@ public class Player : MonoBehaviour
             animFrame = (animFrame + 1) % numFrames;
         }
     }
+
+    private void ScreenShake()
+	{
+        StartCoroutine(ScreenShakeCrt());
+	}
+
+    private IEnumerator ScreenShakeCrt()
+	{
+        SetCameraNoise(screenShakeAmount);
+        for (float t = 0; t < screenShakeTime; t += Time.deltaTime)
+		{
+            yield return new WaitForEndOfFrame();
+            SetCameraNoise(screenShakeAmount * (1 - (t / screenShakeTime)));
+		}
+        SetCameraNoise(0);
+        Camera.main.transform.rotation = Quaternion.identity;
+    }
+
+    private void SetCameraNoise(float noise)
+	{
+        cameraNoise.m_AmplitudeGain = noise;
+	}
 }
