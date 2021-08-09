@@ -29,10 +29,9 @@ public class Player : MonoBehaviour
     private const float minBounceForce = 10;
     private const float minBreakXForce = 10;
     private const float breakRecoilForce = 5;
-    private const float screenShakeAmount = 10;
-    private const float screenShakeTime = 0.3f;
-    private const float slamParticlesMultiplier = 10;
-    private const float dashParticlesMultiplier = 10;
+    //private const float slamParticlesMultiplier = 10;
+    //private const float dashParticlesMultiplier = 10;
+    private const float pitchVariation = 0.15f;
 
     private Rigidbody2D rb;
     private EdgeCollider2D ec;
@@ -55,7 +54,6 @@ public class Player : MonoBehaviour
     private const float jumpBufferTime = 0.1f; //time before hitting ground a jump will still be queued
     private const float jumpGraceTime = 0.1f; //time after leaving ground player can still jump (coyote time)
 
-    private CinemachineBasicMultiChannelPerlin cameraNoise;
     private CinemachineImpulseSource impulseSource;
 
     private const float runFrameTime = 0.1f;
@@ -75,6 +73,19 @@ public class Player : MonoBehaviour
 
     public GameObject particleBurst;
 
+    private AudioSource audioSource;
+    public AudioClip[] jumpSounds;
+    public AudioClip[] hurtSounds;
+    public AudioClip[] flapSounds;
+    public AudioClip landSound;
+    public AudioClip slamStartSound;
+    public AudioClip slamHitSound;
+    public AudioClip dashSound;
+    public AudioClip refillSound;
+    public AudioClip collectSound;
+    public AudioClip[] smashSounds;
+    public AudioClip bounceSound;
+
     [HideInInspector]
     public int sprinkles = 0;
 
@@ -83,10 +94,8 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         ec = gameObject.GetComponent<EdgeCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
-
-        CinemachineVirtualCamera vcam = Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
-        cameraNoise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         impulseSource = gameObject.GetComponent<CinemachineImpulseSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -114,8 +123,6 @@ public class Player : MonoBehaviour
         sr.flipX = facingLeft;
         AdvanceAnim();
         sr.sprite = GetAnimSprite();
-
-        //Camera.main.transform.rotation = Quaternion.identity;
     }
 
     private Collider2D BoxcastTiles(Vector2 direction, float distance)
@@ -230,11 +237,11 @@ public class Player : MonoBehaviour
             {
                 if (isSlamming)
 				{
-                    //PlaySound(slamLandSound);
+                    PlaySound(slamHitSound);
                     ScreenShake();
                     Instantiate(particleBurst, transform.position, Quaternion.identity);
                 }
-                //PlaySound(landSound);
+                PlaySound(landSound);
             }
 
             isSlamming = false;
@@ -261,7 +268,7 @@ public class Player : MonoBehaviour
         if (onCeiling && yVel > 0)
         {
             yVel = 0;
-            //PlaySound(bonkSound);
+            PlaySound(landSound);
         }
 
         //if on ground or just left it: first jump
@@ -275,7 +282,7 @@ public class Player : MonoBehaviour
                 jumpQueued = false;
                 canJump = false;
                 yVel = jumpForce; //Mathf.Max(jumpForce, yVel + jumpForce);
-                //PlaySound(jumpSound);
+                PlayRandomSound(jumpSounds);
                 animState = AnimState.Jump;
             }
             else if (canDoubleJump)
@@ -283,7 +290,7 @@ public class Player : MonoBehaviour
                 StopCancelQueuedJump();
                 jumpQueued = false;
                 yVel = doubleJumpForce; //Mathf.Max(doubleJumpForce, yVel + doubleJumpForce);
-                //PlaySound(doubleJumpSound);
+                PlayRandomSound(flapSounds);
                 canDoubleJump = false;
                 isSlamming = false;
                 animState = AnimState.Flap;
@@ -355,6 +362,8 @@ public class Player : MonoBehaviour
                 yVel = breakRecoilForce;
                 ScreenShake();
                 Instantiate(particleBurst, transform.position, Quaternion.identity);
+                PlayRandomSound(smashSounds);
+                PlaySound(slamHitSound);
             }
 
             animState = AnimState.Slam;
@@ -371,6 +380,7 @@ public class Player : MonoBehaviour
                 dashCountdown = 0;
                 ScreenShake();
                 Instantiate(particleBurst, transform.position, Quaternion.identity);
+                PlayRandomSound(smashSounds);
             }
         }
 
@@ -397,7 +407,7 @@ public class Player : MonoBehaviour
         Bouncer bouncer = collider.GetComponent<Bouncer>();
         if (bouncer != null)
         {
-            //PlaySound(bounceSound);
+            PlaySound(bounceSound);
             isSlamming = false;
             dashCountdown = 0;
             canDoubleJump = true;
@@ -528,24 +538,26 @@ public class Player : MonoBehaviour
 
     private void ScreenShake()
 	{
-        //StartCoroutine(ScreenShakeCrt());
         impulseSource.GenerateImpulse();
     }
 
-    private IEnumerator ScreenShakeCrt()
-	{
-        SetCameraNoise(screenShakeAmount);
-        for (float t = 0; t < screenShakeTime; t += Time.deltaTime)
-		{
-            yield return new WaitForEndOfFrame();
-            SetCameraNoise(screenShakeAmount * (1 - (t / screenShakeTime)));
-		}
-        SetCameraNoise(0);
-        Camera.main.transform.rotation = Quaternion.identity;
+    public void PlaySound(AudioClip sound, bool randomizePitch = true)
+    {
+        if (randomizePitch)
+        {
+            audioSource.pitch = Random.Range(1 - pitchVariation, 1 + pitchVariation);
+        }
+        else
+        {
+            audioSource.pitch = 1;
+        }
+        audioSource.PlayOneShot(sound);
     }
 
-    private void SetCameraNoise(float noise)
+    public void PlayRandomSound(AudioClip[] sounds, bool randomizePitch = true)
 	{
-        cameraNoise.m_AmplitudeGain = noise;
+        int i = Random.Range(0, sounds.Length);
+        AudioClip sound = sounds[i];
+        PlaySound(sound, randomizePitch);
 	}
 }

@@ -4,7 +4,20 @@
 
 For AGBIC 2021: https://itch.io/jam/a-game-by-its-cover-2021
 
-Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
+Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/21/softs/010.html
+
+## Credits
+
+- Concept: Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe))
+- Design, programming, art: Kai Kuehner
+- Sound:
+	- Jump, hurt by cicifyre: https://opengameart.org/content/female-rpg-voice-starter-pack
+	- Flaps by AgentDD: https://freesound.org/people/AgentDD/sounds/246225/ https://freesound.org/people/AgentDD/sounds/246224/
+	- Slam by studiomandragore: https://freesound.org/people/studiomandragore/sounds/401630/
+	- Shatter by ngruber: https://freesound.org/people/ngruber/sounds/204777/
+- Music:
+	- Soliloquy by Matthew Pablo: https://opengameart.org/content/soliloquy
+	- Heroic Demise by Matthew Pablo: https://opengameart.org/content/heroic-demise-hero-theme
 
 ## TODO
 - Bugs
@@ -12,7 +25,7 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- occasionally deactivate+reactivate vcam?
 - Mechanics
 	- Hazards
-		- On touch player- respawn at last checkpoint
+		- On touch player- play hurt sound, respawn at last checkpoint
 		- Candy cane spikes?
 		- Falling things?
 	- Enemies
@@ -27,8 +40,7 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 	- Level
 		- Tiles
 		- Cotton candy bouncy clouds
-		- Collectible sprinkles
-		- Double jump refill candy
+		- Double jump refill candy (improve)
 		- Decorations
 			- Lollipops
 			- Gumdrops
@@ -40,6 +52,7 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Licorice spiky bug
 		- other candy demon guys
 	- Menu
+		- Font
 		- Title screen
 		- Buttons
 		- Intro cutscene
@@ -53,18 +66,15 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Title
 		- Levels
 		- End
-	- Walk
-	- Jump
-	- Flap (double jump)
-	- Land/hit ceiling/hit wall
+	- Walk (step)
+	- Land/hit ceiling/hit wall (impact)
 	- Start slam
-	- Hit ground from slam
-	- Dash
+	- Slam loop?
+	- Dash (whoosh)
 	- Refill jump/dash crystal
 	- Collect sprinkle
 	- Smash sugar barrier
 	- Bounce
-	- Hurt
 	- Enemy
 - Juice
 	- Slam particles come from collision point
@@ -101,8 +111,8 @@ Concept by Alice Pedersen (@bakumoe): https://famicase.com/21/softs/010.html
 		- Terrain- brown chocolate squares; dark brown lava rivers, yellow background
 		- Dash through multiple barriers hanging off ceiling
 	- Level 6- Donut Heaven
-		- Outside terrain- cotton candy clouds, donuts, dark blue space background w/ stars
-		- Inside terrain- dark brown with pink frosting, light brown walls
+		- Outside terrain- cotton candy clouds, donuts, dark blue space background w/ stars (music: Soliloquy)
+		- Inside terrain- dark brown with pink frosting, light brown walls (music: Heroic Demise)
 		- Castle
 		- Boss- Lord Licorice
 	- keep momentum- speedrun routes
