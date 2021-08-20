@@ -11,9 +11,11 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 - Concept: Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe))
 - Design, programming, art: Kai Kuehner
 - Sound:
-	- Jump, hurt by cicifyre: https://opengameart.org/content/female-rpg-voice-starter-pack
+	- Jump, hurt, attack by cicifyre: https://opengameart.org/content/female-rpg-voice-starter-pack
 	- Flaps by AgentDD: https://freesound.org/people/AgentDD/sounds/246225/ https://freesound.org/people/AgentDD/sounds/246224/
 	- Slam by studiomandragore: https://freesound.org/people/studiomandragore/sounds/401630/
+	- Whoosh by man: https://freesound.org/people/man/sounds/14609/
+	- Wind by Divinux: https://freesound.org/people/Divinux/sounds/254642/
 	- Shatter by ngruber: https://freesound.org/people/ngruber/sounds/204777/
 - Music:
 	- Soliloquy by Matthew Pablo: https://opengameart.org/content/soliloquy
@@ -68,13 +70,9 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 		- End
 	- Walk (step)
 	- Land/hit ceiling/hit wall (impact)
-	- Start slam
-	- Slam loop?
-	- Dash (whoosh)
 	- Refill jump/dash crystal
 	- Collect sprinkle
-	- Smash sugar barrier
-	- Bounce
+	- Add earthquake rumble to slam loop?
 	- Enemy
 - Juice
 	- Slam particles come from collision point

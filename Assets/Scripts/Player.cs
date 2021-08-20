@@ -73,14 +73,15 @@ public class Player : MonoBehaviour
 
     public GameObject particleBurst;
 
-    private AudioSource audioSource;
+    public AudioSource sfxAudioSource;
+    public AudioSource slamLoopAudioSource;
     public AudioClip[] jumpSounds;
     public AudioClip[] hurtSounds;
     public AudioClip[] flapSounds;
     public AudioClip landSound;
-    public AudioClip slamStartSound;
+    public AudioClip[] slamStartSounds;
     public AudioClip slamHitSound;
-    public AudioClip dashSound;
+    public AudioClip[] dashSounds;
     public AudioClip refillSound;
     public AudioClip collectSound;
     public AudioClip[] smashSounds;
@@ -95,7 +96,6 @@ public class Player : MonoBehaviour
         ec = gameObject.GetComponent<EdgeCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
         impulseSource = gameObject.GetComponent<CinemachineImpulseSource>();
-        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -244,7 +244,7 @@ public class Player : MonoBehaviour
                 PlaySound(landSound);
             }
 
-            isSlamming = false;
+            StopSlamming();
             yVel = 0;
 
             animState = xVel == 0 ? AnimState.Stand : AnimState.Run;
@@ -282,7 +282,7 @@ public class Player : MonoBehaviour
                 jumpQueued = false;
                 canJump = false;
                 yVel = jumpForce; //Mathf.Max(jumpForce, yVel + jumpForce);
-                PlayRandomSound(jumpSounds);
+                PlayRandomSound(jumpSounds, false);
                 animState = AnimState.Jump;
             }
             else if (canDoubleJump)
@@ -292,7 +292,7 @@ public class Player : MonoBehaviour
                 yVel = doubleJumpForce; //Mathf.Max(doubleJumpForce, yVel + doubleJumpForce);
                 PlayRandomSound(flapSounds);
                 canDoubleJump = false;
-                isSlamming = false;
+                StopSlamming();
                 animState = AnimState.Flap;
             }
         }
@@ -307,7 +307,8 @@ public class Player : MonoBehaviour
                 currentDashForce = dashForce * (facingLeft ? -1 : 1);
                 xForce = currentDashForce;
                 yVel = 0;
-                isSlamming = false;
+                StopSlamming();
+                PlayRandomSound(dashSounds);
                 animState = AnimState.Dash;
             }
 		}
@@ -334,6 +335,7 @@ public class Player : MonoBehaviour
                 isSlamming = true;
                 slamHeldTime = 0;
                 dashCountdown = 0;
+                PlayRandomSound(slamStartSounds, false);
             }
 		}
 
@@ -349,6 +351,10 @@ public class Player : MonoBehaviour
 			}
             else
 			{
+                if (!slamLoopAudioSource.isPlaying)
+                {
+                    slamLoopAudioSource.Play();
+                }
                 yVel = -slamSpeed;
             }
 
@@ -356,7 +362,7 @@ public class Player : MonoBehaviour
             if (collider != null && collider.GetComponent<Breakable>() != null)
 			{
                 collider.GetComponent<Breakable>().Break();
-                isSlamming = false;
+                StopSlamming();
                 canDoubleJump = true;
                 canDash = true;
                 yVel = breakRecoilForce;
@@ -408,7 +414,7 @@ public class Player : MonoBehaviour
         if (bouncer != null)
         {
             PlaySound(bounceSound);
-            isSlamming = false;
+            StopSlamming();
             dashCountdown = 0;
             canDoubleJump = true;
             canDash = true;
@@ -485,6 +491,12 @@ public class Player : MonoBehaviour
         canJump = false;
     }
 
+    private void StopSlamming()
+	{
+        isSlamming = false;
+        slamLoopAudioSource.Stop();
+    }
+
     private Sprite GetAnimSprite()
     {
         switch (animState)
@@ -545,13 +557,13 @@ public class Player : MonoBehaviour
     {
         if (randomizePitch)
         {
-            audioSource.pitch = Random.Range(1 - pitchVariation, 1 + pitchVariation);
+            sfxAudioSource.pitch = Random.Range(1 - pitchVariation, 1 + pitchVariation);
         }
         else
         {
-            audioSource.pitch = 1;
+            sfxAudioSource.pitch = 1;
         }
-        audioSource.PlayOneShot(sound);
+        sfxAudioSource.PlayOneShot(sound);
     }
 
     public void PlayRandomSound(AudioClip[] sounds, bool randomizePitch = true)
