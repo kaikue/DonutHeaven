@@ -87,6 +87,8 @@ public class Player : MonoBehaviour
     public AudioClip[] smashSounds;
     public AudioClip bounceSound;
 
+    public GameObject transitionPlayerPrefab;
+
     [HideInInspector]
     public int sprinkles = 0;
 
@@ -446,6 +448,14 @@ public class Player : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
         GameObject collider = collision.gameObject;
+
+        Portal portal = collider.GetComponent<Portal>();
+        if (portal != null) {
+            GameObject transitionPlayerObj = Instantiate(transitionPlayerPrefab, transform.position, Quaternion.identity);
+            TransitionPlayer transitionPlayer = transitionPlayerObj.GetComponent<TransitionPlayer>();
+            transitionPlayer.SetPortal(collider);
+            gameObject.SetActive(false);
+        }
 
         CollectibleSprinkle sprinkle = collider.GetComponent<CollectibleSprinkle>();
         if (sprinkle != null)

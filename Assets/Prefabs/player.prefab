@@ -286,6 +286,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d0168082ed418dc4c9f5f5f212121cc0, type: 3}
   - {fileID: 8300000, guid: 7bdcb1cd99c3a0e4dabf956c447dea7c, type: 3}
   bounceSound: {fileID: 8300000, guid: dba0db23357ec5a428a08f284354df64, type: 3}
+  transitionPlayerPrefab: {fileID: 5892390428603229384, guid: 5f0927e17820e1c4fbef606cc2e85e36, type: 3}
   sprinkles: 0
 --- !u!199 &3709356144336040272
 ParticleSystemRenderer:

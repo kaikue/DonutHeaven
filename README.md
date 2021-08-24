@@ -20,6 +20,8 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 	- Plingy Coin by Fupi: https://opengameart.org/content/plingy-coin
 	- Land by MentalSanityOff: https://opengameart.org/content/jump-landing-sound
 	- Smash by datasoundsample: https://freesound.org/people/datasoundsample/sounds/41348/
+	- Portal Idle by couchHero: https://freesound.org/people/couchHero/sounds/168910/
+	- Transport by tim.kahn: https://freesound.org/people/tim.kahn/sounds/128587/
 - Music:
 	- Happy Trip to Mars by Alex McCulloch: https://opengameart.org/content/happy-trip-to-mars
 	- Spectacle Carousel by 3xBlast: https://opengameart.org/content/spectacle-carousel
@@ -28,7 +30,6 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 	- Prismatic Light by tcarisland: https://opengameart.org/content/prismatic-light
 
 ## TODO
-- Next level object (donut hole portal)
 - Levels- reduced scope
 	- Title
 		- music: happy trip to mars

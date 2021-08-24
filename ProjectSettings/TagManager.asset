@@ -50,6 +50,9 @@ TagManager:
   - name: LevelObjects
     uniqueID: 2395604679
     locked: 0
+  - name: Effects
+    uniqueID: 1388617635
+    locked: 0
   - name: Player
     uniqueID: 1640383635
     locked: 0
