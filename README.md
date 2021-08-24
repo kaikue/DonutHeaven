@@ -17,14 +17,31 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 	- Whoosh by man: https://freesound.org/people/man/sounds/14609/
 	- Wind by Divinux: https://freesound.org/people/Divinux/sounds/254642/
 	- Shatter by ngruber: https://freesound.org/people/ngruber/sounds/204777/
+	- Plingy Coin by Fupi: https://opengameart.org/content/plingy-coin
+	- Land by MentalSanityOff: https://opengameart.org/content/jump-landing-sound
+	- Smash by datasoundsample: https://freesound.org/people/datasoundsample/sounds/41348/
 - Music:
-	- Soliloquy by Matthew Pablo: https://opengameart.org/content/soliloquy
-	- Heroic Demise by Matthew Pablo: https://opengameart.org/content/heroic-demise-hero-theme
+	- Happy Trip to Mars by Alex McCulloch: https://opengameart.org/content/happy-trip-to-mars
+	- Spectacle Carousel by 3xBlast: https://opengameart.org/content/spectacle-carousel
+	- A New Day by SpiderDave: https://opengameart.org/content/a-new-day
+	- The Journey Continues by Ivan Stanton (northivanastan): https://opengameart.org/content/the-journey-continues
+	- Prismatic Light by tcarisland: https://opengameart.org/content/prismatic-light
 
 ## TODO
-- Bugs
-	- fix occasional camera jitter?
-		- occasionally deactivate+reactivate vcam?
+- Next level object (donut hole portal)
+- Levels- reduced scope
+	- Title
+		- music: happy trip to mars
+	- Frosted Fields- light brown gingerbread with pink/blue frosting; donuts; light blue background
+		- music: spectacle carousel
+	- Jelly Swamp- all-red jelly patches, green background
+		- music: 49
+	- Chocolate Mountain- chocolate tiles, lava, yellow background
+		- music: the journey continues
+	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
+		- music: Prismatic Light
+	- Ending
+		- music: ? victory
 - Mechanics
 	- Hazards
 		- On touch player- play hurt sound, respawn at last checkpoint
@@ -40,7 +57,6 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 	- Show collected sprinkles (some total in each level)
 - Art
 	- Level
-		- Tiles
 		- Cotton candy bouncy clouds
 		- Double jump refill candy (improve)
 		- Decorations
@@ -64,15 +80,8 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 	- Gray out wings if can't double jump, gray out donut halo if can't dash (separate out donut halo, duplicate fall/slam/dash sprites)
 	- Player start slam animation
 - Sound
-	- Music
-		- Title
-		- Levels
-		- End
-	- Walk (step)
-	- Land/hit ceiling/hit wall (impact)
-	- Refill jump/dash crystal
-	- Collect sprinkle
 	- Add earthquake rumble to slam loop?
+	- Walk (step)
 	- Enemy
 - Juice
 	- Slam particles come from collision point

@@ -241,7 +241,10 @@ public class Player : MonoBehaviour
                     ScreenShake();
                     Instantiate(particleBurst, transform.position, Quaternion.identity);
                 }
-                PlaySound(landSound);
+                else
+                {
+                    PlaySound(landSound);
+                }
             }
 
             StopSlamming();
@@ -291,6 +294,7 @@ public class Player : MonoBehaviour
                 jumpQueued = false;
                 yVel = doubleJumpForce; //Mathf.Max(doubleJumpForce, yVel + doubleJumpForce);
                 PlayRandomSound(flapSounds);
+				PlayRandomSound(jumpSounds, false);
                 canDoubleJump = false;
                 StopSlamming();
                 animState = AnimState.Flap;
@@ -407,6 +411,7 @@ public class Player : MonoBehaviour
                 //PlaySound(bonkSound);
                 xForce = 0;
                 dashCountdown = 0;
+                PlaySound(landSound);
             }
         }
 
@@ -448,6 +453,7 @@ public class Player : MonoBehaviour
             sprinkle.Collect();
             Destroy(collider);
             sprinkles++;
+			PlaySound(collectSound);
 		}
 
         RefillCrystal refill = collider.GetComponent<RefillCrystal>();
@@ -463,6 +469,7 @@ public class Player : MonoBehaviour
                     break;
 			}
             refill.Use();
+			PlaySound(refillSound);
         }
     }
 

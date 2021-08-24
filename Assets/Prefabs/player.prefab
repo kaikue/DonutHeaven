@@ -271,7 +271,7 @@ MonoBehaviour:
   flapSounds:
   - {fileID: 8300000, guid: f5768e258360b51429ab780ae4485c3b, type: 3}
   - {fileID: 8300000, guid: 24714056275054d4988c88dcfd9bc6bf, type: 3}
-  landSound: {fileID: 0}
+  landSound: {fileID: 8300000, guid: d06f120bbb0bb2b49a7a9b21c2dcc6cd, type: 3}
   slamStartSounds:
   - {fileID: 8300000, guid: 2343fdac201705744b579119754a7233, type: 3}
   - {fileID: 8300000, guid: ada53ef6aa536454ab140fd3166418b4, type: 3}
@@ -280,8 +280,8 @@ MonoBehaviour:
   dashSounds:
   - {fileID: 8300000, guid: 6ab86e2b87886234da01efdd5d76f74c, type: 3}
   - {fileID: 8300000, guid: 35880717f213be5458f50914b8398b77, type: 3}
-  refillSound: {fileID: 0}
-  collectSound: {fileID: 0}
+  refillSound: {fileID: 8300000, guid: f8fad320608108e4f8e12d8f084c50ea, type: 3}
+  collectSound: {fileID: 8300000, guid: 9d122d5dde387b44d8ec82991ecf8273, type: 3}
   smashSounds:
   - {fileID: 8300000, guid: d0168082ed418dc4c9f5f5f212121cc0, type: 3}
   - {fileID: 8300000, guid: 7bdcb1cd99c3a0e4dabf956c447dea7c, type: 3}
