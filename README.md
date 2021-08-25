@@ -4,11 +4,11 @@
 
 For AGBIC 2021: https://itch.io/jam/a-game-by-its-cover-2021
 
-Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/21/softs/010.html
+Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/21/softs/010.html
 
 ## Credits
 
-- Concept: Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe))
+- Concept & title screen logo/art: baku ([@bakumoe](https://twitter.com/bakumoe))
 - Design, programming, art: Kai Kuehner
 - Sound:
 	- Jump, hurt, attack by cicifyre: https://opengameart.org/content/female-rpg-voice-starter-pack
@@ -30,6 +30,15 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 	- Prismatic Light by tcarisland: https://opengameart.org/content/prismatic-light
 
 ## TODO
+- Menu buttons
+	- Font
+- End screen
+	- restart, quit buttons
+	- other angels: frosting (dark skin pink hair), cinnamon
+	- plumpy appears if you collected all sprinkles
+- Draw some hazards
+	- Candy cane spikes?
+	- Falling things?
 - Levels- reduced scope
 	- Title
 		- music: happy trip to mars
@@ -43,11 +52,8 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 		- music: Prismatic Light
 	- Ending
 		- music: ? victory
-- Mechanics
-	- Hazards
-		- On touch player- play hurt sound, respawn at last checkpoint
-		- Candy cane spikes?
-		- Falling things?
+	- Fill with decorations, checkpoints
+- Extra mechanics
 	- Enemies
 		- Movement patterns
 			- Walk back and forth on platform- turn around if hit wall or edge
@@ -61,23 +67,16 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 		- Cotton candy bouncy clouds
 		- Double jump refill candy (improve)
 		- Decorations
-			- Lollipops
-			- Gumdrops
 			- Swirly brown sticks
 			- Peppermint swirls
-			- Candy canes
 	- Enemies
 		- Jelly slime
 		- Licorice spiky bug
 		- other candy demon guys
-	- Menu
-		- Font
-		- Title screen
-		- Buttons
+	- Cutscenes
 		- Intro cutscene
 		- Boss conversation
 		- End cutscene
-		- End screen
 	- Gray out wings if can't double jump, gray out donut halo if can't dash (separate out donut halo, duplicate fall/slam/dash sprites)
 	- Player start slam animation
 - Sound
@@ -125,6 +124,3 @@ Concept by Alice Pedersen ([@bakumoe](https://twitter.com/bakumoe)): https://fam
 		- Boss- Lord Licorice
 	- keep momentum- speedrun routes
 	- secret sprinkles in early levels where you have to use future mechanics
-- Ending
-	- other angels: frosting (dark skin pink hair), cinnamon
-	- special plumpy ending for collected all sprinkles

@@ -175,7 +175,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1640383635
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b277f4b61d469634e9db109c70b9e8a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -264,10 +264,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 75f32c64360a74343ae1d22a4334c7dd, type: 3}
   - {fileID: 8300000, guid: 883073a04672c40489ddc9807a1db209, type: 3}
   - {fileID: 8300000, guid: 890fbd54405c9434eacd6c16254552b6, type: 3}
-  hurtSounds:
-  - {fileID: 8300000, guid: 55ea89921c99335468b23a1552ccedd9, type: 3}
-  - {fileID: 8300000, guid: 6b6821740a8a13348b8d8617faaeba4a, type: 3}
-  - {fileID: 8300000, guid: d7cea8364b0e43f4bad7ba62d9ac0302, type: 3}
   flapSounds:
   - {fileID: 8300000, guid: f5768e258360b51429ab780ae4485c3b, type: 3}
   - {fileID: 8300000, guid: 24714056275054d4988c88dcfd9bc6bf, type: 3}
@@ -287,6 +283,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7bdcb1cd99c3a0e4dabf956c447dea7c, type: 3}
   bounceSound: {fileID: 8300000, guid: dba0db23357ec5a428a08f284354df64, type: 3}
   transitionPlayerPrefab: {fileID: 5892390428603229384, guid: 5f0927e17820e1c4fbef606cc2e85e36, type: 3}
+  hurtPlayerPrefab: {fileID: 5892390428603229384, guid: 68e0e5206d9d11843993b3ce0378d040, type: 3}
   sprinkles: 0
 --- !u!199 &3709356144336040272
 ParticleSystemRenderer:
@@ -5113,7 +5110,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

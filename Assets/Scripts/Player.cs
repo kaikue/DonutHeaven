@@ -54,6 +54,8 @@ public class Player : MonoBehaviour
     private const float jumpBufferTime = 0.1f; //time before hitting ground a jump will still be queued
     private const float jumpGraceTime = 0.1f; //time after leaving ground player can still jump (coyote time)
 
+    private Transform respawnPoint;
+
     private CinemachineImpulseSource impulseSource;
 
     private const float runFrameTime = 0.1f;
@@ -76,7 +78,6 @@ public class Player : MonoBehaviour
     public AudioSource sfxAudioSource;
     public AudioSource slamLoopAudioSource;
     public AudioClip[] jumpSounds;
-    public AudioClip[] hurtSounds;
     public AudioClip[] flapSounds;
     public AudioClip landSound;
     public AudioClip[] slamStartSounds;
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
     public AudioClip bounceSound;
 
     public GameObject transitionPlayerPrefab;
+    public GameObject hurtPlayerPrefab;
 
     [HideInInspector]
     public int sprinkles = 0;
@@ -405,6 +407,11 @@ public class Player : MonoBehaviour
     {
         GameObject collider = collision.collider.gameObject;
 
+        if (collider.CompareTag("Damage"))
+        {
+            Damage();
+        }
+
         if (collider.layer == LayerMask.NameToLayer("Tiles"))
 		{
             if (collision.GetContact(0).normal.x != 0)
@@ -450,12 +457,19 @@ public class Player : MonoBehaviour
         GameObject collider = collision.gameObject;
 
         Portal portal = collider.GetComponent<Portal>();
-        if (portal != null) {
+        if (portal != null)
+        {
             GameObject transitionPlayerObj = Instantiate(transitionPlayerPrefab, transform.position, Quaternion.identity);
             TransitionPlayer transitionPlayer = transitionPlayerObj.GetComponent<TransitionPlayer>();
             transitionPlayer.SetPortal(collider);
             gameObject.SetActive(false);
         }
+
+        Checkpoint checkpoint = collider.GetComponent<Checkpoint>();
+        if (checkpoint != null)
+		{
+            respawnPoint = checkpoint.respawnPoint;
+		}
 
         CollectibleSprinkle sprinkle = collider.GetComponent<CollectibleSprinkle>();
         if (sprinkle != null)
@@ -481,6 +495,24 @@ public class Player : MonoBehaviour
             refill.Use();
 			PlaySound(refillSound);
         }
+    }
+
+    private void Damage()
+    {
+        ScreenShake();
+        GameObject hurtPlayerObj = Instantiate(hurtPlayerPrefab, transform.position, Quaternion.identity);
+        HurtPlayer hurtPlayer = hurtPlayerObj.GetComponent<HurtPlayer>();
+        hurtPlayer.SetPlayer(this);
+        gameObject.SetActive(false);
+    }
+
+    public void Respawn()
+    {
+        xForce = 0;
+        StopSlamming();
+        dashCountdown = 0;
+        rb.velocity = Vector2.zero;
+        rb.position = respawnPoint.transform.position;
     }
 
 	private void TryStopCoroutine(Coroutine crt)
