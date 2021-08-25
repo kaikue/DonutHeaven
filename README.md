@@ -28,14 +28,14 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- A New Day by SpiderDave: https://opengameart.org/content/a-new-day
 	- The Journey Continues by Ivan Stanton (northivanastan): https://opengameart.org/content/the-journey-continues
 	- Prismatic Light by tcarisland: https://opengameart.org/content/prismatic-light
+- Font: Montserrat https://www.fontsquirrel.com/fonts/montserrat
 
 ## TODO
-- Menu buttons
-	- Font
 - End screen
-	- restart, quit buttons
-	- other angels: frosting (dark skin pink hair), cinnamon
-	- plumpy appears if you collected all sprinkles
+	- Art
+		- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
+		- plumpy appears if you collected all sprinkles
+	- Music
 - Draw some hazards
 	- Candy cane spikes?
 	- Falling things?
@@ -47,7 +47,7 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- Jelly Swamp- all-red jelly patches, green background
 		- music: 49
 	- Chocolate Mountain- chocolate tiles, lava, yellow background
-		- music: the journey continues
+		- music: the journey continues?
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
 	- Ending
