@@ -47,11 +47,11 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- Jelly Swamp- all-red jelly patches, green background
 		- music: 49
 	- Chocolate Mountain- chocolate tiles, lava, yellow background
-		- music: the journey continues?
+		- music: the journey continues? https://opengameart.org/art-search-advanced?keys=&title=&field_art_tags_tid_op=or&field_art_tags_tid=adventure&name=&field_art_type_tid%5B%5D=12&sort_by=score&sort_order=DESC&items_per_page=24&Collection=
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
 	- Ending
-		- music: ? victory
+		- music: ? victory https://opengameart.org/art-search-advanced?keys=happy&title=&field_art_tags_tid_op=or&field_art_tags_tid=&name=&field_art_type_tid%5B0%5D=12&field_art_type_tid%5B1%5D=13&field_art_licenses_tid%5B0%5D=17981&field_art_licenses_tid%5B1%5D=2&field_art_licenses_tid%5B2%5D=17982&field_art_licenses_tid%5B3%5D=3&field_art_licenses_tid%5B4%5D=6&field_art_licenses_tid%5B5%5D=5&field_art_licenses_tid%5B6%5D=10310&field_art_licenses_tid%5B7%5D=4&field_art_licenses_tid%5B8%5D=8&field_art_licenses_tid%5B9%5D=7&sort_by=score&sort_order=DESC&items_per_page=24&Collection=&page=3
 	- Fill with decorations, checkpoints
 - Extra mechanics
 	- Enemies
