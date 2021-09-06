@@ -12,8 +12,8 @@ public class CollectibleSprinkle : MonoBehaviour
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        int x = Mathf.RoundToInt(transform.position.x);
-        int y = Mathf.RoundToInt(transform.position.y);
+        int x = Mathf.FloorToInt(transform.position.x);
+        int y = Mathf.FloorToInt(transform.position.y);
         int seed = x ^ y;//x * (x + 17) * y + 2 * (y + 13) * x + 15;
         Random.InitState(seed);
         //print(transform.position + " " + seed);

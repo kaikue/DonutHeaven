@@ -36,18 +36,37 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 		- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
 		- plumpy appears if you collected all sprinkles
 	- Music
-- Draw some hazards
-	- Candy cane spikes?
-	- Falling things?
+- Draw more hazards
+	- Falling candy cane spikes
+- Space bg (blue perlin noise with stars) for all levels
+	- parallax scroll
+- Hurt player whack sound
+- Donuts jiggle when bounced on
+- Controls tutorial text
 - Levels- reduced scope
 	- Title
 		- music: happy trip to mars
 	- Frosted Fields- light brown gingerbread with pink/blue frosting; donuts; light blue background
 		- music: spectacle carousel
+		- Bounce & avoid spikes segment before floor slam
 	- Jelly Swamp- all-red jelly patches, green background
 		- music: 49
+		- More horizontal spikes
+		- Introduce slam bounce (on jelly floors)
+		- Introduce slam bounce (on round bouncers)
+		- Vertical spikes
+		- Introduce falling hazards
+		- Introduce double jump refill
 	- Chocolate Mountain- chocolate tiles, lava, yellow background
 		- music: the journey continues? https://opengameart.org/art-search-advanced?keys=&title=&field_art_tags_tid_op=or&field_art_tags_tid=adventure&name=&field_art_type_tid%5B%5D=12&sort_by=score&sort_order=DESC&items_per_page=24&Collection=
+		- Introduce dash
+		- Jump up between left & right spikes
+		- Introduce dash break wall
+		- Jump over long pit with double jump + dash
+		- Introduce dash bounce
+		- Introduce dash refill crystal
+		- Dash between ceiling & floor spikes
+		- Dash through multiple barriers hanging off ceiling
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
 	- Ending

@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     private const float runAcceleration = 20;
     public const float maxRunSpeed = 9;
-    private const float jumpForce = 10;
+    private const float jumpForce = 11;
     private const float doubleJumpForce = 15;
     private const float gravityForce = 20;
     private const float maxFallSpeed = 30;
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     private int animFrame = 0;
     private float frameTime; //max time of frame
     private float frameTimer; //goes from frameTime down to 0
-    private bool facingLeft = false; //for animation (images face right)
+    public bool facingLeft = false; //for animation (images face right)
     public Sprite standSprite;
     public Sprite jumpSprite;
     public Sprite flapSprite;
@@ -508,6 +508,7 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
+        facingLeft = false;
         xForce = 0;
         StopSlamming();
         dashCountdown = 0;

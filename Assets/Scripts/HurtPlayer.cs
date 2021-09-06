@@ -19,6 +19,7 @@ public class HurtPlayer : MonoBehaviour
     public void SetPlayer(Player player)
     {
         this.player = player;
+        GetComponent<SpriteRenderer>().flipX = player.facingLeft;
     }
 
     private void FixedUpdate()
