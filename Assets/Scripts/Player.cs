@@ -129,10 +129,10 @@ public class Player : MonoBehaviour
             Damage();
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        /*if (Input.GetKeyDown(KeyCode.N))
 		{
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
-        }
+        }*/
 
         sr.flipX = facingLeft;
         AdvanceAnim();

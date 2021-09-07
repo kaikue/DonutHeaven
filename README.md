@@ -54,22 +54,23 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 
 - Lerp in/out slam swoosh sound
 - More hazards?
+	- Bouncing up & down spike balls
 	- Falling candy cane spikes
 - Levels- reduced scope
 	- Frosted Fields
-	- Jelly Swamp- all-red jelly patches, green or purple background
+	- Jelly Swamp- dark brown tiles with light brown frosting, all-red jelly patches, green or purple background
 		- music: 49
-		- dark brown tiles with light brown frosting
-		- Introduce jelly floors
+		- Introduce bouncy jelly floors
 		- More horizontal spikes
 		- Introduce slam bounce (on jelly floors) (tutorial button)
 		- Introduce slam bounce (on round bouncers)
-		- Ceiling spikes
+		- floating spikes
 		- Introduce falling hazards
 		- Introduce double jump refill
-	- Chocolate Mountain- chocolate tiles, lava, yellow background
+	- Chocolate Mountain- chocolate tiles, lava, yellow or pink background
 		- music: the journey continues? https://opengameart.org/art-search-advanced?keys=&title=&field_art_tags_tid_op=or&field_art_tags_tid=adventure&name=&field_art_type_tid%5B%5D=12&sort_by=score&sort_order=DESC&items_per_page=24&Collection=
 		- Introduce dash (tutorial button)
+		- Damage lava pits
 		- Jump up between left & right spikes
 		- Introduce dash break wall
 		- Jump over long pit with double jump + dash
@@ -79,12 +80,13 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 		- Dash through multiple barriers hanging off ceiling
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
+		- all the tiles together
 		- big, open, chain together lots of flying moves (zoomed out?)
-	- Ending
-		- music: friends
-		- Art
-			- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
-			- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
+		- spell out DONUT HEAVEN in the level???
+		- no damage obstacles?
+	- Ending art
+		- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
+		- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
 	- Fill levels with decorations, checkpoints
 	- Make sure backgrounds are appropriately sized/positioned
 - Itch.io page
