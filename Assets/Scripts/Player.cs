@@ -124,6 +124,11 @@ public class Player : MonoBehaviour
         }
         triggerWasHeld = triggerHeld;
 
+        if (Input.GetButtonDown("Respawn"))
+		{
+            Damage();
+        }
+
         sr.flipX = facingLeft;
         AdvanceAnim();
         sr.sprite = GetAnimSprite();
@@ -405,6 +410,8 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!gameObject.activeSelf) return;
+
         GameObject collider = collision.collider.gameObject;
 
         if (collider.CompareTag("Damage"))
@@ -427,29 +434,44 @@ public class Player : MonoBehaviour
         Bouncer bouncer = collider.GetComponent<Bouncer>();
         if (bouncer != null)
         {
-            PlaySound(bounceSound);
-            StopSlamming();
-            dashCountdown = 0;
-            canDoubleJump = true;
-            canDash = true;
-            /*Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
-            Vector2 bouncerPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
-            Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;*/
-            Vector2 normal = collision.GetContact(0).normal;
-            float bounceYVel = rb.velocity.magnitude * bouncer.bounceForce * normal.y;
-            if (normal.y >= 0 && bounceYVel < minBounceForce)
-			{
-                bounceYVel = minBounceForce;
-            }
-            if (normal.y < 0 && bounceYVel > -minBounceForce)
-            {
-                bounceYVel = -minBounceForce;
-            }
-            float bounceXVel = rb.velocity.magnitude * bouncer.bounceForce * normal.x;
-            xForce = bounceXVel;
-            rb.velocity = new Vector2(bounceXVel, bounceYVel);
-            animState = AnimState.Jump;
+            Bounce(bouncer, collision);
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Bouncer bouncer = collision.collider.GetComponent<Bouncer>();
+        if (bouncer != null && isSlamming)
+		{
+            //fix for weird bug case
+            Bounce(bouncer, collision);
+		}
+    }
+
+    private void Bounce(Bouncer bouncer, Collision2D collision)
+	{
+        PlaySound(bounceSound);
+        StopSlamming();
+        dashCountdown = 0;
+        canDoubleJump = true;
+        canDash = true;
+        /*Vector2 playerPos = rb.position + new Vector2(0, ec.points[0].y);
+        Vector2 bouncerPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
+        Vector2 bouncerToPlayer = (playerPos - bouncerPos).normalized;*/
+        Vector2 normal = collision.GetContact(0).normal;
+        float bounceYVel = rb.velocity.magnitude * bouncer.bounceForce * normal.y;
+        if (normal.y >= 0 && bounceYVel < minBounceForce)
+        {
+            bounceYVel = minBounceForce;
+        }
+        if (normal.y < 0 && bounceYVel > -minBounceForce)
+        {
+            bounceYVel = -minBounceForce;
+        }
+        float bounceXVel = rb.velocity.magnitude * bouncer.bounceForce * normal.x;
+        xForce = bounceXVel;
+        rb.velocity = new Vector2(bounceXVel, bounceYVel);
+        animState = AnimState.Jump;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)

@@ -96,10 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43ef7330020ddd48bb6d5b3fa8dac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
+  voiceSounds:
   - {fileID: 8300000, guid: 55ea89921c99335468b23a1552ccedd9, type: 3}
   - {fileID: 8300000, guid: 6b6821740a8a13348b8d8617faaeba4a, type: 3}
   - {fileID: 8300000, guid: d7cea8364b0e43f4bad7ba62d9ac0302, type: 3}
+  hitSounds:
+  - {fileID: 8300000, guid: d25a04a0099ee0f48996a8143985f220, type: 3}
+  - {fileID: 8300000, guid: 66485bd08a105d444b314d6dcd44ab3f, type: 3}
+  - {fileID: 8300000, guid: 5e0054ec43956e4489ef497112b9a364, type: 3}
+  - {fileID: 8300000, guid: c78c889e1bb07ab40883135d98f2bbd4, type: 3}
 --- !u!82 &3771219636658861549
 AudioSource:
   m_ObjectHideFlags: 0

@@ -6,6 +6,24 @@ For AGBIC 2021: https://itch.io/jam/a-game-by-its-cover-2021
 
 Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/21/softs/010.html
 
+## Controls
+
+### Gamepad (recommended)
+
+- Move: left joystick
+- Jump: A
+- Slam: LT, RT, or B
+- Dash: LB, RB, X, or Y
+- Respawn: View/back/select
+
+### Keyboard
+
+- Move: A/D or left/right arrows
+- Jump: Space
+- Slam: S or down arrow
+- Dash: Shift
+- Respawn: R
+
 ## Credits
 
 - Concept & title screen logo/art: baku ([@bakumoe](https://twitter.com/bakumoe))
@@ -22,6 +40,7 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- Smash by datasoundsample: https://freesound.org/people/datasoundsample/sounds/41348/
 	- Portal Idle by couchHero: https://freesound.org/people/couchHero/sounds/168910/
 	- Transport by tim.kahn: https://freesound.org/people/tim.kahn/sounds/128587/
+	- Hits by Independent.nu: https://opengameart.org/content/37-hitspunches
 - Music:
 	- Happy Trip to Mars by Alex McCulloch: https://opengameart.org/content/happy-trip-to-mars
 	- Spectacle Carousel by 3xBlast: https://opengameart.org/content/spectacle-carousel
@@ -31,35 +50,28 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 - Font: Montserrat https://www.fontsquirrel.com/fonts/montserrat
 
 ## TODO
-- End screen
-	- Art
-		- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
-		- plumpy appears if you collected all sprinkles
-	- Music
-- Draw more hazards
-	- Falling candy cane spikes
-- Space bg (blue perlin noise with stars) for all levels
-	- parallax scroll
-- Hurt player whack sound
 - Donuts jiggle when bounced on
-- Controls tutorial text
+- level 2 & 3 bg clouds
+- Sprinkle counter + speedrun timer persistent
+- Lerp in/out slam swoosh sound
+- Key to respawn from checkpoint?
+- Draw more hazards?
+	- Falling candy cane spikes
 - Levels- reduced scope
-	- Title
-		- music: happy trip to mars
-	- Frosted Fields- light brown gingerbread with pink/blue frosting; donuts; light blue background
-		- music: spectacle carousel
-		- Bounce & avoid spikes segment before floor slam
-	- Jelly Swamp- all-red jelly patches, green background
+	- Frosted Fields
+	- Jelly Swamp- all-red jelly patches, green or purple background
 		- music: 49
+		- dark brown tiles with light brown frosting
+		- Introduce jelly floors
 		- More horizontal spikes
-		- Introduce slam bounce (on jelly floors)
+		- Introduce slam bounce (on jelly floors) (tutorial button)
 		- Introduce slam bounce (on round bouncers)
-		- Vertical spikes
+		- Ceiling spikes
 		- Introduce falling hazards
 		- Introduce double jump refill
 	- Chocolate Mountain- chocolate tiles, lava, yellow background
 		- music: the journey continues? https://opengameart.org/art-search-advanced?keys=&title=&field_art_tags_tid_op=or&field_art_tags_tid=adventure&name=&field_art_type_tid%5B%5D=12&sort_by=score&sort_order=DESC&items_per_page=24&Collection=
-		- Introduce dash
+		- Introduce dash (tutorial button)
 		- Jump up between left & right spikes
 		- Introduce dash break wall
 		- Jump over long pit with double jump + dash
@@ -71,7 +83,11 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 		- music: Prismatic Light
 	- Ending
 		- music: ? victory https://opengameart.org/art-search-advanced?keys=happy&title=&field_art_tags_tid_op=or&field_art_tags_tid=&name=&field_art_type_tid%5B0%5D=12&field_art_type_tid%5B1%5D=13&field_art_licenses_tid%5B0%5D=17981&field_art_licenses_tid%5B1%5D=2&field_art_licenses_tid%5B2%5D=17982&field_art_licenses_tid%5B3%5D=3&field_art_licenses_tid%5B4%5D=6&field_art_licenses_tid%5B5%5D=5&field_art_licenses_tid%5B6%5D=10310&field_art_licenses_tid%5B7%5D=4&field_art_licenses_tid%5B8%5D=8&field_art_licenses_tid%5B9%5D=7&sort_by=score&sort_order=DESC&items_per_page=24&Collection=&page=3
-	- Fill with decorations, checkpoints
+		- Art
+			- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
+			- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
+	- Fill levels with decorations, checkpoints
+	- Make sure backgrounds are appropriately sized/positioned
 - Extra mechanics
 	- Enemies
 		- Movement patterns
