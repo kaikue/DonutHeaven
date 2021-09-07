@@ -47,15 +47,13 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- A New Day by SpiderDave: https://opengameart.org/content/a-new-day
 	- The Journey Continues by Ivan Stanton (northivanastan): https://opengameart.org/content/the-journey-continues
 	- Prismatic Light by tcarisland: https://opengameart.org/content/prismatic-light
+	- Friends by Josh McKay: https://opengameart.org/content/friends-0
 - Font: Montserrat https://www.fontsquirrel.com/fonts/montserrat
 
 ## TODO
-- Donuts jiggle when bounced on
-- level 2 & 3 bg clouds
-- Sprinkle counter + speedrun timer persistent
+
 - Lerp in/out slam swoosh sound
-- Key to respawn from checkpoint?
-- Draw more hazards?
+- More hazards?
 	- Falling candy cane spikes
 - Levels- reduced scope
 	- Frosted Fields
@@ -81,13 +79,19 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 		- Dash through multiple barriers hanging off ceiling
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
+		- big, open, chain together lots of flying moves (zoomed out?)
 	- Ending
-		- music: ? victory https://opengameart.org/art-search-advanced?keys=happy&title=&field_art_tags_tid_op=or&field_art_tags_tid=&name=&field_art_type_tid%5B0%5D=12&field_art_type_tid%5B1%5D=13&field_art_licenses_tid%5B0%5D=17981&field_art_licenses_tid%5B1%5D=2&field_art_licenses_tid%5B2%5D=17982&field_art_licenses_tid%5B3%5D=3&field_art_licenses_tid%5B4%5D=6&field_art_licenses_tid%5B5%5D=5&field_art_licenses_tid%5B6%5D=10310&field_art_licenses_tid%5B7%5D=4&field_art_licenses_tid%5B8%5D=8&field_art_licenses_tid%5B9%5D=7&sort_by=score&sort_order=DESC&items_per_page=24&Collection=&page=3
+		- music: friends
 		- Art
 			- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
 			- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
 	- Fill levels with decorations, checkpoints
 	- Make sure backgrounds are appropriately sized/positioned
+- Itch.io page
+	- Screenshots
+
+### Extra
+
 - Extra mechanics
 	- Enemies
 		- Movement patterns
@@ -121,7 +125,6 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 - Juice
 	- Slam particles come from collision point
 		- take color of terrain?
-	- Bouncers jiggle when bounced on
 	- Dash start effect
 	- More dash/slam trail effects?
 - Levels

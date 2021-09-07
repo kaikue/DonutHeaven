@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
 
     private CinemachineImpulseSource impulseSource;
 
+    private PersistentTracker persistent;
+
     private const float runFrameTime = 0.1f;
     private SpriteRenderer sr;
     private AnimState animState = AnimState.Stand;
@@ -91,15 +93,13 @@ public class Player : MonoBehaviour
     public GameObject transitionPlayerPrefab;
     public GameObject hurtPlayerPrefab;
 
-    [HideInInspector]
-    public int sprinkles = 0;
-
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         ec = gameObject.GetComponent<EdgeCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
         impulseSource = gameObject.GetComponent<CinemachineImpulseSource>();
+        persistent = FindObjectOfType<PersistentTracker>();
     }
 
     private void Update()
@@ -127,6 +127,11 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Respawn"))
 		{
             Damage();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+		{
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         sr.flipX = facingLeft;
@@ -449,7 +454,8 @@ public class Player : MonoBehaviour
     }
 
     private void Bounce(Bouncer bouncer, Collision2D collision)
-	{
+    {
+        bouncer.Bounce();
         PlaySound(bounceSound);
         StopSlamming();
         dashCountdown = 0;
@@ -498,7 +504,7 @@ public class Player : MonoBehaviour
 		{
             sprinkle.Collect();
             Destroy(collider);
-            sprinkles++;
+            persistent.sprinkles++;
 			PlaySound(collectSound);
 		}
 
