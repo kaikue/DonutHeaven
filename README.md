@@ -52,43 +52,40 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 
 ## TODO
 
+- Ask in discord if anyone wants to draw me an ending screen
 - Lerp in/out slam swoosh sound
 - More hazards?
-	- Bouncing up & down spike balls
 	- Falling candy cane spikes
 - Levels- reduced scope
 	- Frosted Fields
-	- Jelly Swamp- dark brown tiles with light brown frosting, all-red jelly patches, green or purple background
-		- music: 49
-		- Introduce bouncy jelly floors
-		- More horizontal spikes
-		- Introduce slam bounce (on jelly floors) (tutorial button)
-		- Introduce slam bounce (on round bouncers)
-		- floating spikes
-		- Introduce falling hazards
-		- Introduce double jump refill
+	- Jelly Swamp
 	- Chocolate Mountain- chocolate tiles, lava, yellow or pink background
 		- music: the journey continues? https://opengameart.org/art-search-advanced?keys=&title=&field_art_tags_tid_op=or&field_art_tags_tid=adventure&name=&field_art_type_tid%5B%5D=12&sort_by=score&sort_order=DESC&items_per_page=24&Collection=
-		- Introduce dash (tutorial button)
 		- Damage lava pits
-		- Jump up between left & right spikes
-		- Introduce dash break wall
+		- Lots of spikes
+		- Dash over pits (tutorial button)
 		- Jump over long pit with double jump + dash
+		- Introduce moving hazards
+		- Introduce double jump refill
 		- Introduce dash bounce
 		- Introduce dash refill crystal
 		- Dash between ceiling & floor spikes
 		- Dash through multiple barriers hanging off ceiling
+		- Ending: slam bounce up on a bunch of donuts to climb really high
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
 		- all the tiles together
 		- big, open, chain together lots of flying moves (zoomed out?)
 		- spell out DONUT HEAVEN in the level???
 		- no damage obstacles?
+		- ending trigger: other angels standing around big cake
 	- Ending art
-		- sprinkle with other angels: frosting (dark skin pink hair), cinnamon
+		- sprinkle with cake and other angels
 		- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
+		- thank you voice clip? (bright 3)
 	- Fill levels with decorations, checkpoints
 	- Make sure backgrounds are appropriately sized/positioned
+- Playtest
 - Itch.io page
 	- Screenshots
 

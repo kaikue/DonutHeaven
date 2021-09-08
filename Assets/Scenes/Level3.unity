@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 1709189204}
   - component: {fileID: 1709189205}
   m_Layer: 0
-  m_Name: buttonslam
+  m_Name: buttondash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,7 +639,7 @@ SpriteRenderer:
   m_SortingLayerID: -1899362617
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e1faa181442128f4393e9442c7f703f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e1917bf3350e184d89cb2a62abe3175, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -662,8 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ab11bc2ede1af49a2207fb7650ed7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardSprite: {fileID: 21300000, guid: e1faa181442128f4393e9442c7f703f7, type: 3}
-  controllerSprite: {fileID: 21300000, guid: c71f1aad795fe9a46a555b920cc7bea4, type: 3}
+  keyboardSprite: {fileID: 21300000, guid: 5e1917bf3350e184d89cb2a62abe3175, type: 3}
+  controllerSprite: {fileID: 21300000, guid: 011203ea047049c4d97e69c5549b63d4, type: 3}
 --- !u!1 &1770797552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,7 +1460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8643738464450108533, guid: 8d62ed1b92a11034e8c2ec0a4737a918, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000047683716
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 8643738464450108533, guid: 8d62ed1b92a11034e8c2ec0a4737a918, type: 3}
       propertyPath: m_LocalPosition.y
