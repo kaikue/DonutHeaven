@@ -13,6 +13,8 @@ public class TransitionPlayer : MonoBehaviour
     private AudioSource bgm;
     private float startVol;
 
+    public GameObject loadingScreenPrefab;
+
     private void Start()
     {
         startPos = transform.position;
@@ -37,6 +39,7 @@ public class TransitionPlayer : MonoBehaviour
         }
         else if (time >= length + waitTime)
         {
+            Instantiate(loadingScreenPrefab);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }

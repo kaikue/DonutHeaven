@@ -1,11 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public void LoadStart()
+    public UnityEvent startEvent;
+    public GameObject loadingScreenPrefab;
+
+	private void Update()
+	{
+		if (Input.GetButtonDown("Start"))
+		{
+            startEvent.Invoke();
+		}
+	}
+
+	public void LoadStart()
     {
         SceneManager.LoadScene(0);
     }
@@ -13,6 +25,7 @@ public class Menu : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene(1);
+        Instantiate(loadingScreenPrefab);
     }
 
     public void Quit()

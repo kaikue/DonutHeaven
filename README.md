@@ -53,34 +53,25 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 ## TODO
 
 - Ask in discord if anyone wants to draw me an ending screen
-- Lerp in/out slam swoosh sound
+	At the end of the game you get back to "Donut Heaven" and reunite with your friends (the two other angels). So I was thinking the ending screen would be the three angels together looking happy. Maybe they're eating donuts or cake or something
+	The screen looks like this so it would be just a transparent image to fill up the main space at the top
+- Lerp in/out slam swoosh sound?
 - More hazards?
 	- Falling candy cane spikes
 - Levels- reduced scope
 	- Frosted Fields
 	- Jelly Swamp
-	- Chocolate Mountain- chocolate tiles, lava, yellow or pink background
-		- music: the journey continues? https://opengameart.org/art-search-advanced?keys=&title=&field_art_tags_tid_op=or&field_art_tags_tid=adventure&name=&field_art_type_tid%5B%5D=12&sort_by=score&sort_order=DESC&items_per_page=24&Collection=
-		- Damage lava pits
-		- Lots of spikes
-		- Dash over pits (tutorial button)
-		- Jump over long pit with double jump + dash
-		- Introduce moving hazards
-		- Introduce double jump refill
-		- Introduce dash bounce
-		- Introduce dash refill crystal
-		- Dash between ceiling & floor spikes
-		- Dash through multiple barriers hanging off ceiling
-		- Ending: slam bounce up on a bunch of donuts to climb really high
+	- Chocolate Mountain
 	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
 		- music: Prismatic Light
 		- all the tiles together
+		- Introduce dash refill crystal?
 		- big, open, chain together lots of flying moves (zoomed out?)
 		- spell out DONUT HEAVEN in the level???
 		- no damage obstacles?
 		- ending trigger: other angels standing around big cake
 	- Ending art
-		- sprinkle with cake and other angels
+		- sprinkle with cake/donuts and other angels
 		- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
 		- thank you voice clip? (bright 3)
 	- Fill levels with decorations, checkpoints

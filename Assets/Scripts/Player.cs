@@ -402,6 +402,8 @@ public class Player : MonoBehaviour
                 xForce = -Mathf.Sign(xForce) * breakRecoilForce;
                 xVel = xForce;
                 dashCountdown = 0;
+                canDoubleJump = true;
+                canDash = true;
                 ScreenShake();
                 Instantiate(particleBurst, transform.position, Quaternion.identity);
                 PlayRandomSound(smashSounds);
