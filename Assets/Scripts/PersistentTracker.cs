@@ -7,6 +7,7 @@ public class PersistentTracker : MonoBehaviour
 {
     public bool destroying = false;
     public int sprinkles = 0;
+    public int possibleSprinkles = 0;
     public float time = 0;
 
     private void Awake()
@@ -18,8 +19,17 @@ public class PersistentTracker : MonoBehaviour
             destroying = true;
             Destroy(gameObject);
         }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+    }
 
-        DontDestroyOnLoad(gameObject);
+	private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+	{
+        int levelSprinkles = FindObjectsOfType<CollectibleSprinkle>().Length;
+        possibleSprinkles += levelSprinkles;
     }
 
 	private void Update()

@@ -285,6 +285,7 @@ MonoBehaviour:
   bounceSound: {fileID: 8300000, guid: dba0db23357ec5a428a08f284354df64, type: 3}
   transitionPlayerPrefab: {fileID: 5892390428603229384, guid: 5f0927e17820e1c4fbef606cc2e85e36, type: 3}
   hurtPlayerPrefab: {fileID: 5892390428603229384, guid: 68e0e5206d9d11843993b3ce0378d040, type: 3}
+  endingPlayerPrefab: {fileID: 7242435792563174227, guid: f5bfdee587002864baf2b2030722078c, type: 3}
 --- !u!199 &3709356144336040272
 ParticleSystemRenderer:
   serializedVersion: 6

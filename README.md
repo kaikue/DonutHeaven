@@ -41,6 +41,7 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- Portal Idle by couchHero: https://freesound.org/people/couchHero/sounds/168910/
 	- Transport by tim.kahn: https://freesound.org/people/tim.kahn/sounds/128587/
 	- Hits by Independent.nu: https://opengameart.org/content/37-hitspunches
+	- Angel happy sound made with sfxr: https://www.drpetter.se/project_sfxr.html
 - Music:
 	- Happy Trip to Mars by Alex McCulloch: https://opengameart.org/content/happy-trip-to-mars
 	- Spectacle Carousel by 3xBlast: https://opengameart.org/content/spectacle-carousel
@@ -55,28 +56,23 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 - Ask in discord if anyone wants to draw me an ending screen
 	At the end of the game you get back to "Donut Heaven" and reunite with your friends (the two other angels). So I was thinking the ending screen would be the three angels together looking happy. Maybe they're eating donuts or cake or something
 	The screen looks like this so it would be just a transparent image to fill up the main space at the top
-- Lerp in/out slam swoosh sound?
-- More hazards?
-	- Falling candy cane spikes
 - Levels- reduced scope
 	- Frosted Fields
 	- Jelly Swamp
 	- Chocolate Mountain
-	- Donut Heaven- pink cotton candy cloud tiles, dark blue space background
-		- music: Prismatic Light
-		- all the tiles together
+	- Donut Heaven
+		- decorations
 		- Introduce dash refill crystal?
-		- big, open, chain together lots of flying moves (zoomed out?)
-		- spell out DONUT HEAVEN in the level???
-		- no damage obstacles?
-		- ending trigger: other angels standing around big cake
+		- chain together lots of flying moves?
 	- Ending art
-		- sprinkle with cake/donuts and other angels
-		- secret ending (plumpy appears? falling sprinkles?) if you collected all sprinkles
+		- angels smiling and eating cake
 		- thank you voice clip? (bright 3)
-	- Fill levels with decorations, checkpoints
-	- Make sure backgrounds are appropriately sized/positioned
+	- add 45 more sprinkles
+- Improve jump candy art?
+- Lerp in/out slam swoosh sound?
+- Set particles at ending zone?
 - Playtest
+	- all sprinkles runthrough
 - Itch.io page
 	- Screenshots
 

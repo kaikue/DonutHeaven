@@ -8,11 +8,18 @@ public class EndStats : MonoBehaviour
 {
     public TextMeshProUGUI sprinklesText;
     public TextMeshProUGUI timeText;
+    public GameObject bonus;
 
     private void Start()
     {
+        bonus.SetActive(false);
         PersistentTracker persistent = FindObjectOfType<PersistentTracker>();
-        sprinklesText.text = "Sprinkles Collected:\n" + persistent.sprinkles;
+        bool allSprinkles = persistent.sprinkles == persistent.possibleSprinkles;
+        if (allSprinkles)
+        {
+            bonus.SetActive(true);
+        }
+        sprinklesText.text = "Sprinkles Collected:\n" + persistent.sprinkles + (allSprinkles ? " (WOW!)" : "");
         TimeSpan timeSpan = TimeSpan.FromSeconds(persistent.time);
         string timeStr = string.Format("{0:D2}:{1:D2}.{2:D}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
         timeText.text = "Time:\n" + timeStr;

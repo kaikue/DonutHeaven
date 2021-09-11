@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
 
     public GameObject transitionPlayerPrefab;
     public GameObject hurtPlayerPrefab;
+    public GameObject endingPlayerPrefab;
 
     private void Start()
     {
@@ -492,6 +493,17 @@ public class Player : MonoBehaviour
             GameObject transitionPlayerObj = Instantiate(transitionPlayerPrefab, transform.position, Quaternion.identity);
             TransitionPlayer transitionPlayer = transitionPlayerObj.GetComponent<TransitionPlayer>();
             transitionPlayer.SetPortal(collider);
+            gameObject.SetActive(false);
+        }
+
+        EndingZone endingZone = collider.GetComponent<EndingZone>();
+        if (endingZone != null)
+        {
+            GameObject endingPlayerObj = Instantiate(endingPlayerPrefab, transform.position, Quaternion.identity);
+            EndingPlayer endingPlayer = endingPlayerObj.GetComponent<EndingPlayer>();
+            endingPlayer.SetEndingZone(endingZone, wasOnGround);
+            //ParticleSystem.Particle[] particles = new ParticleSystem.Particle[] { };
+            //int numParticles = GetComponent<ParticleSystem>().GetParticles(particles);
             gameObject.SetActive(false);
         }
 
