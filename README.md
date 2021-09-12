@@ -51,16 +51,8 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 	- Friends by Josh McKay: https://opengameart.org/content/friends-0
 - Font: Montserrat https://www.fontsquirrel.com/fonts/montserrat
 
-## TODO
+## Extra Ideas
 
-- Playtest w/ dad
-- Itch.io page
-	- Windows build
-	- Publish
-- Website
-- Promote on twitter (tag baku), reddit (just_post, playmygame), discord, message composers
-
-### Extra
 - Levels
 	- Frosted Fields
 	- Jelly Swamp
