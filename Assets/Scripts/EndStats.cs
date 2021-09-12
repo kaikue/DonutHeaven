@@ -19,7 +19,7 @@ public class EndStats : MonoBehaviour
         {
             bonus.SetActive(true);
         }
-        sprinklesText.text = "Sprinkles Collected:\n" + persistent.sprinkles + (allSprinkles ? " (WOW!)" : "");
+        sprinklesText.text = "Sprinkles:\n" + persistent.sprinkles + (allSprinkles ? ("/" + persistent.possibleSprinkles) : "");
         TimeSpan timeSpan = TimeSpan.FromSeconds(persistent.time);
         string timeStr = string.Format("{0:D2}:{1:D2}.{2:D}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
         timeText.text = "Time:\n" + timeStr;

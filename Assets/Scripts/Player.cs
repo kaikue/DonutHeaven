@@ -529,6 +529,7 @@ public class Player : MonoBehaviour
             {
                 case RefillCrystal.RefillType.Jump:
                     canDoubleJump = true;
+                    canDash = true;
                     break;
                 case RefillCrystal.RefillType.Dash:
                     canDash = true;

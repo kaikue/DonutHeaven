@@ -30,6 +30,7 @@ public class PersistentTracker : MonoBehaviour
 	{
         int levelSprinkles = FindObjectsOfType<CollectibleSprinkle>().Length;
         possibleSprinkles += levelSprinkles;
+        //print(levelSprinkles + " " + possibleSprinkles);
     }
 
 	private void Update()

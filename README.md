@@ -53,31 +53,24 @@ Concept by baku ([@bakumoe](https://twitter.com/bakumoe)): https://famicase.com/
 
 ## TODO
 
-- Ask in discord if anyone wants to draw me an ending screen
-	At the end of the game you get back to "Donut Heaven" and reunite with your friends (the two other angels). So I was thinking the ending screen would be the three angels together looking happy. Maybe they're eating donuts or cake or something
-	The screen looks like this so it would be just a transparent image to fill up the main space at the top
-- Levels- reduced scope
+- Playtest w/ dad
+- Itch.io page
+	- Windows build
+	- Publish
+- Website
+- Promote on twitter (tag baku), reddit (just_post, playmygame), discord, message composers
+
+### Extra
+- Levels
 	- Frosted Fields
 	- Jelly Swamp
 	- Chocolate Mountain
 	- Donut Heaven
-		- decorations
 		- Introduce dash refill crystal?
 		- chain together lots of flying moves?
-	- Ending art
-		- angels smiling and eating cake
-		- thank you voice clip? (bright 3)
-	- add 45 more sprinkles
 - Improve jump candy art?
 - Lerp in/out slam swoosh sound?
 - Set particles at ending zone?
-- Playtest
-	- all sprinkles runthrough
-- Itch.io page
-	- Screenshots
-
-### Extra
-
 - Extra mechanics
 	- Enemies
 		- Movement patterns
